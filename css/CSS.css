@@ -1,0 +1,12 @@
+.container{
+    width: 960px;
+}
+
+.LeftContact{
+    width: 480px;
+    float: left;
+}
+.RightContact{
+    width: 480px;
+    float: right;
+}
