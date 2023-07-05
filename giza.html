@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>W3.CSS Pyramid of Giza</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<style>
+body {font-family: "Times New Roman", Georgia, Serif;}
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Playfair Display";
+  letter-spacing: 5px;
+  .rating {
+  display: inline-block;
+  position: relative;
+  height: 50px;
+  line-height: 50px;
+  font-size: 50px;
+}
+}
+
+.rating label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  cursor: pointer;
+}
+
+.rating label:last-child {
+  position: static;
+}
+
+.rating label:nth-child(1) {
+  z-index: 5;
+}
+
+.rating label:nth-child(2) {
+  z-index: 4;
+}
+
+.rating label:nth-child(3) {
+  z-index: 3;
+}
+
+.rating label:nth-child(4) {
+  z-index: 2;
+}
+
+.rating label:nth-child(5) {
+  z-index: 1;
+}
+
+.rating label input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+.rating label .icon {
+  float: left;
+  color: transparent;
+}
+
+.rating label:last-child .icon {
+  color: #000;
+}
+
+.rating:not(:hover) label input:checked ~ .icon,
+.rating:hover label:hover input ~ .icon {
+  color: #09f;
+}
+
+.rating label input:focus:not(:checked) ~ .icon:last-child {
+  color: #000;
+  text-shadow: 0 0 5px #09f;
+}
+div.gallery {
+  border: 1px solid #ccc;
+}
+
+div.gallery:hover {
+  border: 1px solid #777;
+}
+
+div.gallery img {
+  width: 100%;
+  height: auto;
+}
+
+div.desc {
+  padding: 15px;
+  text-align: center;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.responsive {
+  padding: 0 6px;
+  float: left;
+  width: 24.99999%;
+}
+
+@media only screen and (max-width: 700px) {
+  .responsive {
+    width: 49.99999%;
+    margin: 6px 0;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .responsive {
+    width: 100%;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Page content -->
+<div class="w3-content" style="max-width:1100px">
+
+  <!-- About Section -->
+  <div class="w3-row w3-padding-64" id="about">
+    <div class="w3-col m6 w3-padding-large w3-hide-small">
+     <img src="Pyramidofgiza/photo.jpg" class="w3-round w3-image w3-opacity-min" alt="Table Setting" width="600" height="750">
+    </div>
+
+    <div class="w3-col m6 w3-padding-large">
+      <h1 class="w3-center">Piramid of Giza</h1><br>
+      <h5 class="w3-center">Constructed 4,500 years ago.</h5>
+      <p class="w3-large">Located in Giza Necropolis, the Pyramids of Giza are a cluster of massive tombs that were built over 4500 years ago by the ancient Egyptians. They were once grand tombs for the pharaohs Khufu, Khafre, and Menkaure. Now a <span class="w3-tag w3-light-grey">UNESCO World Heritage Site</span> and one of the <span class="w3-tag w3-light-grey">Seven Wonders of the World</span></p>. Before you plan a visit, learn more about the history of the Pyramids of Giza. 
+      <p class="w3-large w3-text-grey w3-hide-medium">Located in: Giza Necropolis
+        Address: Al Haram, Nazlet El-Semman, Al Giza Desert, Giza Governorate 3512201, Egypt <br>
+        Hours: <br>
+Closed ⋅ Opens 8AM Everyday <br>
+        Height: 139 m <br>
+        Constructed: c. 2570 BC (Old Kingdom) <br>
+        Materials: Limestone, Granite, Basalt, Mortar <br>
+        Function: Tomb, Monument <br> 
+        Architectural style: Ancient Egyptian architecture <br> </p> 
+    </div>
+  </div>
+  
+  <hr>
+  <!-- More Information -->
+  <div class="w3-row w3-padding-64" id="about">
+    <div class="w3-col m6 w3-padding-large w3-hide-small">
+     <img src="Pyramidofgiza/photo.jpg" class="w3-round w3-image w3-opacity-min" alt="Table Setting" width="600" height="750">
+    </div>
+
+    <div class="w3-col m6 w3-padding-large">
+      <h1 class="w3-center">More information</h1><br>
+      <h5 class="w3-center">Building Boom</h5>
+      <p class="w3-large">The ancient engineering feats at Giza were so impressive that even today scientists can't be sure how the pyramids were built. Yet they have learned much about the people who built them and the political power necessary to make it happen. The builders were skilled, well-fed Egyptian workers who lived in a nearby temporary city. Archaeological digs on the fascinating site have revealed a highly organized community, rich with resources, that must have been backed by strong central authority. It's likely that communities across Egypt contributed workers, as well as food and other essentials, for what became in some ways a national project to display the wealth and control of the ancient pharaohs. Such revelations have led Zahi Hawass, secretary general of Egypt's Supreme Council of Antiquities and a National Geographic explorer-in-residence, to note that in one sense it was the Pyramids that built Egypt—rather than the other way around.</p>
+    </div>
+  </div>
+
+  <hr>
+   <!-- More Information -->
+   <div class="w3-row w3-padding-64" id="about">
+    <div class="w3-col m6 w3-padding-large w3-hide-small">
+     <img src="Pyramidofgiza/photo.jpg" class="w3-round w3-image w3-opacity-min" alt="Table Setting" width="600" height="750">
+    </div>
+
+    <div class="w3-col m6 w3-padding-large">
+      <h5 class="w3-center">Preserving the Past</h5>
+<p class="w3-large">If the Pyramids helped to build ancient Egypt, they also preserved it. Giza allows us to explore a long-vanished world. "Many people think of the site as just a cemetery in the modern sense, but it's a lot more than that," says Museum of Fine Arts, Boston, and Tufts University Egyptologist Peter Der Manuelian. "In these decorated tombs you have wonderful scenes of every aspect of life in ancient Egypt—so it's not just about how Egyptians died but how they lived." Tomb art includes depictions of ancient farmers working their fields and tending livestock, fishing and fowling, carpentry, costumes, religious rituals, and burial practices. Inscriptions and texts also allow research into Egyptian grammar and language. "Almost any subject you want to study about Pharaonic civilization is available on the tomb walls at Giza," Der Manuelian says. To help make these precious resources accessible to all, Der Manuelian heads the Giza Archives Project, an enormous collection of Giza photographs, plans, drawings, manuscripts, object records, and expedition diaries that enables virtual visits to the plateau. Older records preserve paintings or inscriptions that have since faded away, capture artifacts that have been lost or destroyed, and unlock tombs not accessible to the public. Armed with the output of the longest-running excavations ever at Giza, the Harvard-Museum of Fine Arts, Boston Expedition (1902-47), Der Manuelian hopes to add international content and grow the archive into the world's central online repository for Giza-related material. But he stresses that nothing could ever replicate, or replace, the experience of a personal visit to Giza.</p>
+      <p class="w3-large w3-text-grey w3-hide-medium"><span class="w3-tag w3-light-grey">The Future of the Pyramids</span>Tourism to the structures has declined rapidly since the advent of the Arab Spring in 2011, when Egypt experienced a political upheaval that lasted years. The country has since been through several administration changes, and the instability means the future of tourism to the Pyramids is uncertain.</p>
+    </div>
+  </div>
+
+  <hr>
+  <!-- Hotel Section -->
+  <div class="w3-row w3-padding-64" id="menu">
+    <div class="w3-col l6 w3-padding-large">
+      <h1 class="w3-center">Listing top hotels</h1><br>
+      <h4>Mövenpick Hotel Cairo - Media City - 86$ per night</h4>
+      <p class="w3-text-grey"> The Mövenpick Hotel is located in the heart of Media City Studios, just 15-minutes from the Pyramids of Giza. The Mövenpick has many facilities including a full service gym and business centre.
+
+        Rooms are equipped with Wi-Fi, TV, air-conditioning and all modern amenities.
+        
+        The hotel has a large outdoor swimming pool, sauna, hot tub and a wellness centre. Mövenpick Hotel also has shops with a variety of goods for guests to peruse.
+The centre of Cairo is only a 40-minute drive from the hotel. Private parking is available on site.</p><br>
+    
+      <h4> Hilton Pyramids Golf - 98$ per night </h4>
+      
+      <p class="w3-text-grey">Hilton Pyramids Golf offers warm hospitality within a fantastic Central 6th of October location; perfect for sightseeing, shopping or a business trip. With its classic accommodation and leisure and spa facilities.
+
+        Choose from a variety of well-appointed Hilton Rooms, all of which feature golf-course or pool views from the balcony. Upgrade to a Junior Suite to benefit from a spacious living room.
+        
+        Be pampered in the hotel spa, work out in the gym or swim in the beautiful outdoor pool. Children will love the variety of entertainment on offer at the kids' club and pool.
+        
+        There are 7 elegant bars and restaurants to choose from Enjoy golf-course views at the Hilton Pyramids Golf as you lunch at the Fairway Restaurant or sip a cocktail at the swim-up Island Bar. If you are still in work mode during your stay, Hilton Pyramids Golf has 7 meeting rooms.
+        
+        The amusement park, Dream Park is 0.8 km away, Mall of Egypt and other Cairo attractions, including the renowned Pyramids of Giza, are nearby. Hilton Pyramids Golf is also just 8 km from industrial zone.</p><br>
+    
+      <h4>Novotel Cairo 6th Of October - 85$ per night </h4>
+
+      <p class="w3-text-grey">Contemporary hotel in 6th of October City, 25 km from central Cairo and the Pyramids. It provides spacious rooms, with flat-screen TVs. There is an outdoor pool and 24-hour restaurant.
+
+        Each of the tastefully decorated rooms and suites offer satellite TV and air conditioning. WiFi is available in public areas free of charge. Private parking is also available.
+        
+        There is a traditional hammam and massage facilities. You can work out in the well-equipped fitness centre.
+        
+        Novotel’s trendy restaurant serves French, Italian and Lebanese cuisine. Enjoy a wide selection for buffet breakfast, lunch and dinner. You can also relax in one of 2 bars, while listening to live music.
+        
+        The Novotel Cairo 6th of October is next to Dar El Fouad Hospital and 45 km from Cairo International Airport.</p><br>
+    
+      <h4>Swiss Inn Pyramids Golf Resort - 90$ per night </h4>
+      
+      <p class="w3-text-grey">This 5-star resort is located in an esteemed residential area of Cairo, and uniquely combines an open space environment with health and luxury for a relaxing and rejuvenating experience. Free WiFi is available throughout the property and rooms.
+
+        Rooms are large, with private balcony views overlooking the golf course. Tea and coffee facilities are available in the rooms. Mineral water available upon arrival.
+There are three restaurants serving Egyptian and international cuisine. You can also relax with a drink at the lobby bar and there is a spacious outdoor heated pool for your benefit.
+        
+        The Swiss Inn Pyramids Golf Resort is situated by the 27-hole Dreamland Golf Course, which is open all year round, and provides a challenging combination of water hazards and natural features. You also have the benefit of the World Gym, which offers a wide range of therapies, treatments and products. For families there is a kids corner for the kids entertainment.
+        
+        The Swiss Inn is just a 15-minute drive to the Pyramids of Giza. Enjoy a unique combination of culture, wellbeing and relaxation for a memorable holiday experience.</p><br>  
+    </div>
+    
+    <div class="w3-col l6 w3-padding-large">
+      <img src="/w3images/tablesetting.jpg" class="w3-round w3-image w3-opacity-min" alt="Menu" style="width:100%">
+    </div>
+  </div>
+  <hr>
+<!--Rating-->
+  <div class="w3-container w3-padding-64" id="rating">
+    <h1>Ratings</h1><br>
+    <p>You can also contact us by phone 00553123-2323 or email catering@catering.com, or you can send us a message here:</p>
+    <form action="/action_page.php" target="_blank">
+      <p><input class="w3-input w3-padding-16" type="text" placeholder="Name" required name="Name"></p>
+      <p><input class="w3-input w3-padding-16" type="text" placeholder="Message \ Special requirements" required name="Message"></p>
+      <form class="rating">
+        <label>
+          <input type="radio" name="stars" value="1" />
+          <span class="icon">★</span>
+        </label>
+        <label>
+          <input type="radio" name="stars" value="2" />
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+        </label>
+        <label>
+          <input type="radio" name="stars" value="3" />
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+          <span class="icon">★</span>   
+        </label>
+        <label>
+          <input type="radio" name="stars" value="4" />
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+        </label>
+        <label>
+          <input type="radio" name="stars" value="5" />
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+        </label>
+        <script>
+            $(':radio').change(function() {
+  console.log('New star rating: ' + this.value);
+});
+        </script>
+      </form>
+      <p><button class="w3-button w3-light-grey w3-section" type="submit">SEND</button></p>
+    </form>
+  </div>
+<!--Gallery-->
+
+<div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="img_5terre.jpg">
+        <img src="img_5terre.jpg" alt="Cinque Terre" width="600" height="400">
+</a>
+      <div class="desc">Add a description of the image here</div>
+    </div>
+  </div>
+  
+  
+  <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="img_forest.jpg">
+        <img src="img_forest.jpg" alt="Forest" width="600" height="400">
+      </a>
+      <div class="desc">Add a description of the image here</div>
+    </div>
+  </div>
+  
+  <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="img_lights.jpg">
+        <img src="img_lights.jpg" alt="Northern Lights" width="600" height="400">
+      </a>
+      <div class="desc">Add a description of the image here</div>
+    </div>
+  </div>
+  
+  <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="img_mountains.jpg">
+        <img src="img_mountains.jpg" alt="Mountains" width="600" height="400">
+      </a>
+      <div class="desc">Add a description of the image here</div>
+    </div>
+  </div>
+  
+</div>
+</body>
+</html>
