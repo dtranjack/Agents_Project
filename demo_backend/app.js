@@ -1,33 +1,24 @@
-const mysql = require('mysql');
 const express = require('express');
-const ejs = require('ejs');
 const app = express();
+const port = 3000;
 
-// Serve static files from the "public" directory
-app.use(express.static(__dirname + '/public'));
+// Set the view engine to EJS
 app.set('view engine', 'ejs');
 
-const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root', //change user to your user
-    password: '171198', //change password to your password
-    database: 'monument' //change database to your database name
+// Serve static files
+app.use(express.static(__dirname + '/public'));
+
+// Define a route for the About Us page
+app.get('/about', (req, res) => {
+    res.render('About_Us');
 });
 
-app.get('/', (req, res) => {
-    const query = 'SELECT * FROM `monuments` WHERE (`monuments`.`ID` = 1)';
-    connection.query(query, (error, results) => {
-        if (error) {
-            console.error('Error executing query: ', error);
-            return;
-        }
-
-        console.log('Query results:', results);
-        // Render the index.ejs template with the query results
-        res.render('TestEJS.ejs', { results: results });
-    });
+// Define a route for the Contact Us page
+app.get('/contact', (req, res) => {
+    res.render('Contact_Us');
 });
 
-app.listen(3000, () => {
-    console.log('Server listening on port 3000');
+// Start the server
+app.listen(port, () => {
+    console.log(`Server is listening on port ${port}`);
 });

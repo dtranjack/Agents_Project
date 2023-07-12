@@ -3,12 +3,17 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
-    <script src="../lib/jquery-3.7.0.js"></script>
+    <script src="../public/lib/jquery-3.7.0.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="CSS/Contact_Us.css">
-    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Contact Us</title>
 </head>
 <body>
+<div class="head-bar">
+    <%- include('./layout/NavBar') %>
+</div>
 <div class="header2">
     <h1>
         Contact Us
@@ -51,25 +56,25 @@
             <div>
                 <label for="full-name">Full Name <span style="color: red">*</span></label>
                 <div>
-                    <input type="text" id="full-name" size="50%">
+                    <input type="text" id="full-name">
                 </div>
             </div>
             <div>
                 <label for="email">Email Address <span style="color: red">*</span></label>
                 <div>
-                    <input type="email" id="email" required size="50%">
+                    <input type="email" id="email" required>
                 </div>
             </div>
             <div>
                 <label for="phone">Phone Number</label>
                 <div>
-                    <input type="tel" id="phone" name="phone" placeholder="Ex: (123)-456-789" size="50%">
+                    <input type="tel" id="phone" name="phone" placeholder="Ex: (123)-456-789">
                 </div>
             </div>
             <div>
                 <label for="subj">Choose Subject</label>
                 <br>
-                <select id="subj" name="subject" required form="contact-form" style="width: 85%">
+                <select id="subj" name="subject" required form="contact-form" style="width: 100%">
                     <option value="General_Enquiry">General Enquiry</option>
                     <option value="FeedBack">Feedback</option>
                     <option value="Other">Other</option>
@@ -78,7 +83,7 @@
             <div>
                 <label for="msg">Message <span style="color: red">*</span></label>
                 <div>
-                    <textarea id="msg" rows="6" cols="50"></textarea>
+                    <textarea id="msg" placeholder="Messages or feedbacks here."></textarea>
                 </div>
                 <div>
                     <input id="submitBTN" type="submit">
@@ -86,9 +91,9 @@
             </div>
         </form>
     </div>
-
-
 </div>
-
+<div class="footer">
+    <%- include('./layout/footer') %>
+</div>
 </body>
 </html>
