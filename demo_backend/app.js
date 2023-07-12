@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
 
         console.log('Query results:', results);
         // Render the index.ejs template with the query results
-        res.render('TestEJS', { results: results });
+        res.render('TestEJS.ejs', { results: results });
     });
 });
 
