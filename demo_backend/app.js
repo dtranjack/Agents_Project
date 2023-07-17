@@ -67,7 +67,7 @@ app.get('/contact', (req, res) => {
 });
 
 app.get('/test', (req, res) => {
-    res.render('layout/home_PopDes', {contiqueResult});
+    res.render('layout/home_OurRec', {monuResult});
 });
 
 //Define a route for the Home page for /home and /

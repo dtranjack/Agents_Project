@@ -6,7 +6,7 @@ div.PopDes .card {
 }
 
 div.PopDes .card-img-top {
-    height: 200px;
+    height: 200px !important;
     object-fit: cover;
     transition: transform 0.3s ease;
 }

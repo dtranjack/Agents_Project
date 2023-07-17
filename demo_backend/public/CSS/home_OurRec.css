@@ -3,6 +3,7 @@
 div.OurRec .card {
     height: 100%;
     overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 div.OurRec body {
@@ -11,20 +12,20 @@ div.OurRec body {
 
 div.OurRec .card-img-top {
     object-fit: cover;
-    height: 200px;
+    height: 250px;
     transition: transform 0.3s ease;
 }
 
 div.OurRec .card:hover .card-img-top {
     transform: scale(1.1);
     overflow: hidden;
-    height: 220px;
 }
 
 div.OurRec .card-body {
     height: 100%;
     display: flex;
     flex-direction: column;
+    text-overflow: ellipsis;
 }
 
 div.OurRec .card-title {
@@ -37,5 +38,5 @@ div.OurRec .card-title {
 div.OurRec .card-text {
     overflow: hidden;
     text-overflow: ellipsis;
-    flex-grow: 1;
+    flex-grow: 1 ;
 }
