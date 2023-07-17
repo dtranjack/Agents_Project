@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monument Web</title>
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta3/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    body,
+    html {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      max-width: 1200px;
+    }
+
+    .header-container {
+      display: flex;
+      flex-direction: column;
+      height: calc(100vh - 56px);
+      /* Subtract the height of the navbar */
+    }
+
+    .img-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .img-container img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+
+    .text-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: white;
+      z-index: 1;
+    }
+
+    .text-overlay h1 {
+      font-size: 36px;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .text-overlay p {
+      font-size: 18px;
+      margin-bottom: 0;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Navbar styles */
+    .navbar {
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+    .navbar-brand img {
+      height: 40px;
+    }
+
+    .navbar-nav .nav-link {
+      color: #000;
+      font-weight: bold;
+    }
+
+    .navbar-nav .nav-link:hover {
+      color: #007bff;
+    }
+
+    /* Search bar styles */
+    .form-control {
+      border-radius: 20px;
+      margin-right: 10px;
+      flex: 1;
+    }
+
+    .btn-outline-primary {
+      border-radius: 20px;
+    }
+
+    /* Description section styles */
+    .description {
+      margin-top: 50px;
+    }
+
+    .description h2 {
+      margin-bottom: 20px;
+      color: #007bff;
+    }
+
+    /* Gallery section styles */
+    .gallery {
+      margin-top: 50px;
+    }
+
+    .card {
+      border-radius: 10px;
+      margin-bottom: 20px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card-img-top {
+      object-fit: cover;
+      height: 200px;
+    }
+
+    .card-body {
+      padding: 10px;
+    }
+
+    .comment-box {
+      margin-top: 50px;
+    }
+
+    .comment-box h2 {
+      margin-bottom: 20px;
+      color: #007bff;
+    }
+
+    /* Footer styles */
+    footer {
+      background-color: #f8f9fa;
+      padding: 20px 0;
+      text-align: center;
+    }
+
+    footer p {
+      margin-bottom: 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="#"><img src="logo.jpg" alt="Logo"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Destination
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">Destination 1</a></li>
+              <li><a class="dropdown-item" href="#">Destination 2</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">More Destinations</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About Us</a>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Where are you going?" aria-label="Search">
+          <button class="btn btn-outline-primary" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <div class="header-container">
+    <div class="img-container">
+      <img src="IMG/Arc_de_Triomphe/cover.jpg" alt="Arc de Triomphe">
+      <div class="text-overlay">
+        <h1>Welcome to Arc de Triomphe</h1>
+        <p>Discover Parisian grandeur at its finest</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container description">
+    <h2>Description</h2>
+    <p>The Arc de Triomphe is one of the most iconic monuments in Paris, France. Situated at the western end of the Champs-Élysées, it stands as a symbol of French national pride and a testament to the city's rich history and grandeur.</p>
+  
+    <p>This magnificent arch was commissioned by Napoleon Bonaparte in 1806 to commemorate the victories of the French army. It was designed by Jean Chalgrin and took over 30 years to complete. The Arc de Triomphe stands at a height of 50 meters and is adorned with intricate sculptures and reliefs that depict significant moments in French history.</p>
+  
+    <p>Visitors can climb to the top of the monument to enjoy panoramic views of Paris, including the famous avenue of the Champs-Élysées and the Eiffel Tower. Inside the arch, there is a museum that showcases the history and significance of the Arc de Triomphe, as well as the names of French generals and the victories they achieved.</p>
+  
+    <p>The Arc de Triomphe also serves as an important symbol of remembrance and reverence. It is the site of the Tomb of the Unknown Soldier, where the eternal flame burns in memory of those who lost their lives during World War I. The monument is a place of reflection and tribute, attracting visitors from around the world.</p>
+  
+    <p>Today, the Arc de Triomphe stands as a timeless symbol of French culture and heritage. Its majestic architecture, historical significance, and central location make it a must-visit attraction for anyone exploring the beautiful city of Paris.</p>
+  </div>
+  
+
+  <div class="container gallery">
+    <h2>Gallery</h2>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card">
+          <img src="IMG/Arc_de_Triomphe/Arc_de_Triomphe_1811.jpg" alt="Arc de Triomphe 1811" class="card-img-top">
+          <div class="card-body">
+            <p>Description of the image</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <img src="IMG/Arc_de_Triomphe/Arc_Triomphe.jpg" alt="Arc Triomphe" class="card-img-top">
+          <div class="card-body">
+            <p>Description of the image</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <img src="IMG/Arc_de_Triomphe/Avenue_des_Champs-Élysées_in_1939.jpg" alt="Avenue des Champs-Élysées in 1939"
+            class="card-img-top">
+          <div class="card-body">
+            <p>Description of the image</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <img src="IMG/Arc_de_Triomphe/Bastille_Day_Parade_170714-D-PB383-005_(35087624434).jpg"
+            alt="Avenue des Champs-Élysées in 1939" class="card-img-top">
+          <div class="card-body">
+            <p>Description of the image</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <img src="IMG/Arc_de_Triomphe/Funérailles_de_Victor_Hugo,_31_mai_1885.jpg"
+            alt="Avenue des Champs-Élysées in 1939" class="card-img-top">
+          <div class="card-body">
+            <p>Description of the image</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <img src="IMG/Arc_de_Triomphe/Paris._Arc_de_Triomphe._Postcard,_c.1920.jpg"
+            alt="Avenue des Champs-Élysées in 1939" class="card-img-top">
+          <div class="card-body">
+            <p>Description of the image</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <img src="IMG/Arc_de_Triomphe/Paris_-_Orthophotographie_-_2018_-_Place_Charles-de-Gaulle_02.jpg"
+            alt="Avenue des Champs-Élysées in 1939" class="card-img-top">
+          <div class="card-body">
+            <p>Description of the image</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <img src="IMG/Arc_de_Triomphe/Paris_Arc_de_Triomphe_inscriptions_6.jpg"
+            alt="Avenue des Champs-Élysées in 1939" class="card-img-top">
+          <div class="card-body">
+            <p>Description of the image</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <img src="IMG/Arc_de_Triomphe/Paris_Arc_de_Triomphe_Mort_de_Marceau_2.jpg"
+            alt="Avenue des Champs-Élysées in 1939" class="card-img-top">
+          <div class="card-body">
+            <p>Description of the image</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container comment-box">
+    <h2>Comments</h2>
+    <form>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter your name">
+      </div>
+      <div class="form-group">
+        <label for="comment">Comment</label>
+        <textarea class="form-control" id="comment" rows="4" placeholder="Enter your comment"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h4>Contact Us</h4>
+          <p>123 Monument Street, Paris, France</p>
+          <p>Email: info@monumentweb.com</p>
+          <p>Phone: +1 123-456-7890</p>
+        </div>
+        <div class="col-md-6">
+          <h4>Follow Us</h4>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-pinterest"></i></a>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <p class="text-center">&copy; 2023 Monument Web. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta3/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
