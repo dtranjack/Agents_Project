@@ -1,12 +1,23 @@
 .container{
-    width: 960px;
+    width: 100%;
 }
 
 .LeftContact{
-    width: 480px;
+    width: 40%;
     float: left;
 }
 .RightContact{
-    width: 480px;
-    float: right;
+    width: 40%;
+    float: left;
+}
+.right{
+    width: 10%;
+    float: left;
+}
+.left{
+    width: 10%;
+    float: left;
+}
+h2{
+    text-align: center;
 }
