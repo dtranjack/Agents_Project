@@ -1,0 +1,66 @@
+
+
+#div_tong{
+    width: 100%;
+}
+
+
+
+video {
+    width: 100%;
+    height: auto;
+}
+#slide{
+    width: 50%;
+    align-content: center;
+    align-items: center;
+    align-self: center;
+}
+
+#khung1{
+    padding: 16px;
+    border-style:  hidden hidden hidden double ;
+    border-color: crimson;
+    border-width: 5px;
+    border-radius: 12px;
+    background-color: #c7e2ff;
+    font-size: 20px;
+}
+#khung2{
+    padding: 16px;
+    border-style:  hidden hidden hidden double ;
+    border-color: crimson;
+    border-width: 5px;
+    background-color: #c7e2ff;
+    font-size: 20px;
+    border-radius: 12px
+}
+#khung3{
+    padding: 16px;
+    border-style:  hidden hidden hidden double ;
+    border-width: 5px;
+    border-color: crimson;
+    background-color: #c7e2ff;
+    font-size: 20px;
+    border-radius: 12px
+}
+
+.bo{
+    border-radius: 8px
+}
+#fbody>.fbody_left{
+    width: 10%;
+    height: auto;
+    background-color: white;
+    float: left;
+}
+#fbody>.fbody_mid{
+    width: 80%;
+    float: left;
+    /*background-color: darkseagreen;*/
+}
+#fbody>.fbody_right{
+    width: 10%;
+    /*background-color: aqua;*/
+    float: left;
+}
