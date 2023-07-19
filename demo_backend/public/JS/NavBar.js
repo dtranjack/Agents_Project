@@ -1,6 +1,6 @@
 $(document).ready(function () {
     // Fetch continents data from the server
-    $.ajax({
+    jQuery.ajax({
         url: '/continents', // This URL should point to the server endpoint that provides continents data
         method: 'GET',
         dataType: 'json',
