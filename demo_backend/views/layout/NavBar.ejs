@@ -6,8 +6,9 @@
     <link rel="stylesheet" href="CSS/NavBar.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </head>
-<body>
+<body ng-app='myApp' ng-controller='DropdownController'>
 <nav class="navbar navbar-expand-lg navbar-dark">
     <a class="navbar-brand" href="#">
         <img src="IMG/spirals.png" alt="Logo" class="logo">
@@ -28,12 +29,22 @@
                 <a class="nav-link" href="/home">Home</a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="designationDropdown" role="button"
-                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="designationDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Destinations
                 </a>
                 <div class="dropdown-menu" aria-labelledby="designationDropdown" id="destinationsMenu">
-                    <!-- Continents dropdown items will be added here dynamically -->
+                  <ul>
+                    <li ng-repeat="continent in continents">
+                      <a class="dropdown-item continent" href="#" data-continent-id="{{ continent.id }}" ng-click="showSubmenu($event)">
+                        {{ continent.name }}
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li ng-repeat="monument in continent.monuments">
+                          <a class="dropdown-item" href="#">{{ monument.name }}</a>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
                 </div>
             </li>
             <li class="nav-item">
@@ -45,8 +56,8 @@
         </ul>
     </div>
 </nav>
-
-<!-- Include the NavBar.js script here -->
-<script src="JS/NavBar.js"></script>
+<script src="https://code.angularjs.org/1.8.2/angular.min.js"></script>
+<script src="https://code.angularjs.org/1.8.2/angular-sanitize.min.js"></script>
+<script src="JS/dropdown_menu.destinations.angular.js"></script>
 </body>
 </html>

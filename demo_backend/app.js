@@ -90,6 +90,21 @@ app.get('/continents', (req, res) => {
     });
 });
 
+app.get('/monuments/:continentId', (req, res) => {
+  const continentId = req.params.continentId;
+  const query = `SELECT m.* FROM monument AS m
+                 INNER JOIN countries AS c ON m.country_id = c.id
+                 WHERE c.continent_id = ?`;
+  connection.query(query, [continentId], (error, results) => {
+    if (error) {
+      console.error('Error fetching monuments:', error);
+      // Handle the error accordingly
+    } else {
+      res.json(results);
+    }
+  });
+});
+
 // Set the view engine to EJS
 app.set('view engine', 'ejs');
 
