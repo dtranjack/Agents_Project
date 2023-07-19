@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - Spirals</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </head>
 <body>
 <div class="head-bar">
@@ -22,6 +26,29 @@
 <div class="OurRec">
     <%- include('./layout/home_OurRec')%>
 </div>
+
+<div class="AllDes">
+    <%- include('./layout/home_All')%>
+</div>
+
+<section class="bg-primary text-white py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 text-center">
+                <h2 class="mb-4">Subscribe to our Newsletter</h2>
+                <p class="lead">Get the latest updates delivered straight to your inbox.</p>
+                <!-- Newsletter Subscription Form -->
+                <form class="form-inline justify-content-center mt-4">
+                    <div class="form-group mx-sm-3 mb-2">
+                        <label for="email" class="sr-only">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
 
 <div class="footer">
     <%- include('./layout/footer') %>

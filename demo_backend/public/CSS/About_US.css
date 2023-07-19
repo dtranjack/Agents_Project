@@ -52,7 +52,7 @@ body {
     box-shadow: 5px 5px lightgrey;
 }
 
-p {
+.content p {
     color: #666;
     line-height: 1.6;
     text-indent: 20px;

@@ -5,6 +5,8 @@ const port = 3000;
 
 var contiqueResult;
 var monuResult;
+var allmonuResult;
+var allResult;
 
 const connection = mysql.createConnection({
     host: 'localhost',
@@ -26,8 +28,7 @@ connection.query(gimmeContiInfos, (error, results) => {
     if (error) {
         console.error('Error executing query:', error);
         // Handle the error accordingly
-    }
-    else {
+    } else {
         // Assign the query result to a different variable
         contiqueResult = results;
         console.log(contiqueResult);
@@ -49,6 +50,45 @@ connection.query(gimmeMonuInfos, (error, results) => {
     }
 });
 
+const monumentIDs = [1, 11, 5];
+const gimmeAllMonuInfos = `SELECT * FROM monument WHERE ID IN (${monumentIDs.join(',')}) LIMIT 3`;
+
+connection.query(gimmeAllMonuInfos, (error, results) => {
+    if (error) {
+        console.error('Error executing query:', error);
+        // Handle the error accordingly
+    } else {
+        // Assign the query result to a different variable
+        allmonuResult = results;
+        console.log(allmonuResult);
+        // Now you can use the variable to access the query result
+    }
+});
+
+const allMonu = `SELECT * FROM monument`;
+
+connection.query(allMonu, (error, results) => {
+    if (error) {
+        console.error('Error executing query', error);
+    } else {
+        allResult = results;
+        console.log(allResult)
+    }
+});
+
+app.get('/continents', (req, res) => {
+    // Perform the database query to fetch continents data
+    const getContinentsQuery = 'SELECT * FROM continents';
+    connection.query(getContinentsQuery, (error, results) => {
+        if (error) {
+            console.error('Error executing query:', error);
+            res.status(500).json({error: 'Internal server error'});
+        } else {
+            // Send the continents data as a JSON response
+            res.json(results);
+        }
+    });
+});
 
 // Set the view engine to EJS
 app.set('view engine', 'ejs');
@@ -67,13 +107,17 @@ app.get('/contact', (req, res) => {
 });
 
 app.get('/test', (req, res) => {
-    res.render('layout/home_OurRec', {monuResult});
+    res.render('layout/home_All', {monuResult, contiqueResult, allmonuResult, allResult});
 });
 
 //Define a route for the Home page for /home and /
-const route_home=['/home', ''];
-app.get(route_home, (req,res) => {
-    res.render('Homepage', {contiqueResult, monuResult});
+const route_home = ['/home', ''];
+app.get(route_home, (req, res) => {
+    res.render('Homepage', {contiqueResult, monuResult, allmonuResult, allResult});
+});
+
+app.get('/all', (req, res) => {
+    res.render('All_Destination', {monuResult, contiqueResult, allmonuResult, allResult});
 });
 
 // Start the server

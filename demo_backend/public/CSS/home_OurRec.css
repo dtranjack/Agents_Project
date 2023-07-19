@@ -19,6 +19,7 @@ div.OurRec .card-img-top {
 div.OurRec .card:hover .card-img-top {
     transform: scale(1.1);
     overflow: hidden;
+    height: 250px;
 }
 
 div.OurRec .card-body {
