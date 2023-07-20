@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Generation Time: Jul 19, 2023 at 11:02 AM
+-- Generation Time: Jul 20, 2023 at 12:26 PM
 -- Server version: 11.0.2-MariaDB-1:11.0.2+maria~ubu2204
 -- PHP Version: 8.1.20
 
@@ -82,7 +82,7 @@ INSERT INTO `countries` (`ID`, `name`, `continent_ID`, `cover`) VALUES
 CREATE TABLE `gallery` (
   `ID` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `img_path` varchar(255) DEFAULT NULL,
+  `img_path` text DEFAULT NULL,
   `monu_ID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
@@ -91,25 +91,25 @@ CREATE TABLE `gallery` (
 --
 
 INSERT INTO `gallery` (`ID`, `name`, `img_path`, `monu_ID`) VALUES
-(1, 'Petra', 'li', 2),
-(2, 'Great Wall of China', 'li', 1),
-(3, 'Christ the Redeemer Statue', 'li', 3),
-(4, 'Machu Picchu', 'li', 4),
-(5, 'Chichen Itza', 'li', 5),
-(6, 'Colosseum', 'li', 6),
-(7, 'Taj Mahal', 'li', 7),
-(8, 'Statue of Liberty', 'li', 8),
-(9, 'Arc de Triomphe', 'li', 9),
-(10, 'Halong Bay', 'li', 10),
-(11, 'Ho Chi Minh Mausoleum', 'li', 11);
+(1, 'Petra', '[\"IMG/Petra/1.jpg\",\"IMG/Petra/2.jpg\",\"IMG/Petra/3.jpg\",\"IMG/Petra/4.jpg\",\"IMG/Petra/5.jpg\"]', 2),
+(2, 'Great Wall of China', '[\"IMG/Greatwall_of_China/1.jpg\",\"IMG/Greatwall_of_China/2.jpg\",\"IMG/Greatwall_of_China/3.jpg\",\"IMG/Greatwall_of_China/4.jpg\",\"IMG/Greatwall_of_China/5.jpg\",\"IMG/Greatwall_of_China/6.jpg\"]', 1),
+(3, 'Christ the Redeemer Statue', '[\"IMG/Christ_the_Redeemer_statue/1.jpg\",\"IMG/Christ_the_Redeemer_statue/2.jpg\",\"IMG/Christ_the_Redeemer_statue/3.jpg\",\"IMG/Christ_the_Redeemer_statue/4.jpg\",\"IMG/Christ_the_Redeemer_statue/5.jpg\",\"IMG/Christ_the_Redeemer_statue/6.jpg\"]', 3),
+(4, 'Machu Picchu', '[\"IMG/Machu_Picchu/1.jpg\",\"IMG/Machu_Picchu/2.jpg\",\"IMG/Machu_Picchu/3.jpg\",\"IMG/Machu_Picchu/4.jpg\",\"IMG/Machu_Picchu/5.jpg\"]', 4),
+(5, 'Chichen Itza', '[\"IMG/Chichen_Itza/1.jpg\",\"IMG/Chichen_Itza/2.jpg\",\"IMG/Chichen_Itza/3.jpg\",\"IMG/Chichen_Itza/4.jpg\",\"IMG/Chichen_Itza/5.jpg\",\"IMG/Chichen_Itza/6.jpg\",\"IMG/Chichen_Itza/7.jpg\",\"IMG/Chichen_Itza/8.jpg\"]', 5),
+(6, 'Colosseum', '[\"IMG/Colosseum/1.jpg\",\"IMG/Colosseum/2.jpg\",\"IMG/Colosseum/3.jpg\",\"IMG/Colosseum/4.jpg\",\"IMG/Colosseum/5.jpg\",\"IMG/Colosseum/6.jpg\",\"IMG/Colosseum/7.jpg\",\"IMG/Colosseum/8.jpg\",\"IMG/Colosseum/9.jpg\",\"IMG/Colosseum/10.jpg\"]', 6),
+(7, 'Taj Mahal', '[\"IMG/Taj_Mahal/1.jpg\",\"IMG/Taj_Mahal/2.jpg\",\"IMG/Taj_Mahal/3.jpg\",\"IMG/Taj_Mahal/4.jpg\",\"IMG/Taj_Mahal/5.jpg\",\"IMG/Taj_Mahal/6.jpg\",\"IMG/Taj_Mahal/7.jpg\",\"IMG/Taj_Mahal/8.jpg\"]', 7),
+(8, 'Statue of Liberty', '[\"IMG/Statue_of_Liberty/1.jpg\",\"IMG/Statue_of_Liberty/2.jpg\",\"IMG/Statue_of_Liberty/3.jpg\",\"IMG/Statue_of_Liberty/4.jpg\",\"IMG/Statue_of_Liberty/5.jpg\",\"IMG/Statue_of_Liberty/6.jpg\",\"IMG/Statue_of_Liberty/7.jpg\"]', 8),
+(9, 'Arc de Triomphe', '[\"IMG/Arc_de_Triomphe/1.jpg\",\"IMG/Arc_de_Triomphe/2.jpg\",\"IMG/Arc_de_Triomphe/3.jpg\",\"IMG/Arc_de_Triomphe/4.jpg\",\"IMG/Arc_de_Triomphe/5.jpg\",\"IMG/Arc_de_Triomphe/6.jpg\",\"IMG/Arc_de_Triomphe/7.jpg\",\"IMG/Arc_de_Triomphe/8.jpg\",\"IMG/Arc_de_Triomphe/9.jpg\"]', 9),
+(10, 'Halong Bay', '[\"IMG/Halong_Bay/1.jpg\",\"IMG/Halong_Bay/2.jpg\",\"IMG/Halong_Bay/3.jpg\",\"IMG/Halong_Bay/4.jpg\",\"IMG/Halong_Bay/5.jpg\",\"IMG/Halong_Bay/6.jpg\",\"IMG/Halong_Bay/7.jpg\",\"IMG/Halong_Bay/8.jpg\",\"IMG/Halong_Bay/9.jpg\",\"IMG/Halong_Bay/10.jpg\",\"IMG/Halong_Bay/11.jpg\"]', 10),
+(11, 'Ho Chi Minh Mausoleum', '[\"IMG/HCM_Mausoleum/1.jpg\",\"IMG/HCM_Mausoleum/2.jpg\",\"IMG/HCM_Mausoleum/3.jpg\",\"IMG/HCM_Mausoleum/4.jpg\",\"IMG/HCM_Mausoleum/5.jpg\",\"IMG/HCM_Mausoleum/6.jpg\",\"IMG/HCM_Mausoleum/7.jpg\"]', 11);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `monument`
+-- Table structure for table `monuments`
 --
 
-CREATE TABLE `monument` (
+CREATE TABLE `monuments` (
   `ID` int(11) NOT NULL,
   `name` varchar(26) DEFAULT NULL,
   `description` varchar(1740) DEFAULT NULL,
@@ -121,10 +121,10 @@ CREATE TABLE `monument` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 --
--- Dumping data for table `monument`
+-- Dumping data for table `monuments`
 --
 
-INSERT INTO `monument` (`ID`, `name`, `description`, `short_description`, `mini_background`, `cover`, `gallery_ID`, `country_ID`) VALUES
+INSERT INTO `monuments` (`ID`, `name`, `description`, `short_description`, `mini_background`, `cover`, `gallery_ID`, `country_ID`) VALUES
 (1, 'Great Wall of China', 'The Great Wall of China is one of the most iconic and remarkable man-made structures in the world, encompassing a rich history and cultural significance. Stretching over 13,000 miles (21,196 kilometers) across northern China, it is an architectural marvel that has captivated people\'s imaginations for centuries. Construction of the Great Wall began in the 7th century BC and continued for centuries, with various dynasties contributing to its expansion and fortification. Initially built as a defensive barrier against invasions, the wall served as a protective boundary against nomadic tribes and later became a symbol of national unity. While sections of the wall have eroded or succumbed to the passage of time, significant portions still stand today, attracting millions of visitors who marvel at its grandeur and appreciate its historical significance.', 'Discover the grandeur of the Great Wall of China, an awe-inspiring architectural wonder stretching over 13,000 miles. Explore its rich history, formidable defensive structures, and breathtaking landscapes as you delve into one of the world\'s most iconic cultural landmarks.', 'IMG/Greatwall_of_China/mini_background.jpg', '/IMG/Greatwall_of_China/cover.jpg', 2, 1),
 (2, 'Petra', 'Petra, an ancient city nestled in the rugged desert of modern-day Jordan, is a captivating archaeological site renowned for its extraordinary architecture and historical significance. Often referred to as the \"Rose City\" due to the color of its sandstone cliffs, Petra flourished as the capital of the Nabataean kingdom from the 4th century BC to the 1st century AD. This unique city was strategically located along trade routes, allowing it to thrive as a major trading hub for spices, silk, and incense. The most famous structure within Petra is the Al-Khazneh, or the Treasury, an intricate temple facade carved into the rock face. This breathtaking sight is just one example of the city\'s impressive rock-cut architecture, with its tombs, temples, and intricate water management systems showcasing the advanced engineering skills of the Nabataeans. Over time, Petra\'s prominence waned as trade routes shifted, and the city was eventually abandoned and lost to the Western world for centuries until its rediscovery in the early 19th century. Today, Petra stands as a UNESCO World Heritage site, attracting visitors from around the globe who are awe-inspired by its timeless beauty and intriguing historical legacy.', 'Embark on a virtual journey to the ancient city of Petra, a captivating UNESCO World Heritage site nestled in the Jordanian desert. Immerse yourself in the awe-inspiring rock-cut architecture, explore intricate temples and tombs, and unravel the mysteries of this remarkable Nabataean kingdom.', 'IMG/Petra/mini_background.jpg', '/IMG/Petra/cover.jpg', 1, 2),
 (3, 'Christ the Redeemer Statue', 'The Christ the Redeemer Statue, an iconic symbol of Brazil and a marvel of religious artistry, stands tall atop the Corcovado mountain in Rio de Janeiro. This colossal statue, reaching a height of 98 feet (30 meters), depicts Jesus Christ with open arms, symbolizing peace and welcome. Designed by French sculptor Paul Landowski and built by Brazilian engineer Heitor da Silva Costa, the construction of the statue began in 1922 and was completed in 1931. The statue\'s location offers breathtaking panoramic views of Rio de Janeiro, including its famous beaches, lush mountains, and vibrant cityscape. Christ the Redeemer was intended to be a symbol of faith and a testament to Brazil\'s strong Catholic heritage. Over the years, it has become an iconic landmark and a UNESCO World Heritage site, attracting millions of visitors who are captivated by its grandeur and spiritual significance. The statue underwent several renovations and improvements to maintain its structural integrity and has been a source of inspiration and unity for people around the world. It has become an enduring symbol of Brazil\'s warm hospitality and the welcoming spirit of its people.', 'Experience the magnificence of the Christ the Redeemer Statue, an iconic symbol overlooking the vibrant city of Rio de Janeiro. Discover the statue\'s rich history, breathtaking views, and its role as a universal symbol of peace, unity, and faith in the heart of Brazil.', '/IMG/Christ_the_Redeemer_statue/mini_background.jpg', '/IMG/Christ_the_Redeemer_statue/cover.jpg', 3, 5),
@@ -162,9 +162,9 @@ ALTER TABLE `gallery`
   ADD KEY `monu_FK` (`monu_ID`);
 
 --
--- Indexes for table `monument`
+-- Indexes for table `monuments`
 --
-ALTER TABLE `monument`
+ALTER TABLE `monuments`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `gallery_FK` (`gallery_ID`);
 
@@ -191,9 +191,9 @@ ALTER TABLE `gallery`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `monument`
+-- AUTO_INCREMENT for table `monuments`
 --
-ALTER TABLE `monument`
+ALTER TABLE `monuments`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
@@ -210,12 +210,12 @@ ALTER TABLE `countries`
 -- Constraints for table `gallery`
 --
 ALTER TABLE `gallery`
-  ADD CONSTRAINT `monu_FK` FOREIGN KEY (`monu_ID`) REFERENCES `monument` (`ID`);
+  ADD CONSTRAINT `monu_FK` FOREIGN KEY (`monu_ID`) REFERENCES `monuments` (`ID`);
 
 --
--- Constraints for table `monument`
+-- Constraints for table `monuments`
 --
-ALTER TABLE `monument`
+ALTER TABLE `monuments`
   ADD CONSTRAINT `gallery_FK` FOREIGN KEY (`gallery_ID`) REFERENCES `gallery` (`ID`);
 COMMIT;
 

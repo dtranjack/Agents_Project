@@ -5,24 +5,24 @@
     <title>Title</title>
 </head>
 <body>
-<p>hi</p>
+<p id="jsonprint"></p>
 </body>
 
 <script>
   const images = [
-    'IMG/Arc_de_Triomphe/1.jpg',
-    'IMG/Arc_de_Triomphe/2.jpg',
-    'IMG/Arc_de_Triomphe/3.jpg',
-    'IMG/Arc_de_Triomphe/4.jpg',
-    'IMG/Arc_de_Triomphe/5.jpg',
-    'IMG/Arc_de_Triomphe/6.jpg',
-    'IMG/Arc_de_Triomphe/7.jpg',
-    'IMG/Arc_de_Triomphe/8.jpg',
-    'IMG/Arc_de_Triomphe/9.jpg',
+      'IMG/HCM_Mausoleum/1.jpg',
+      'IMG/HCM_Mausoleum/2.jpg',
+      'IMG/HCM_Mausoleum/3.jpg',
+      'IMG/HCM_Mausoleum/4.jpg',
+      'IMG/HCM_Mausoleum/5.jpg',
+      'IMG/HCM_Mausoleum/6.jpg',
+      'IMG/HCM_Mausoleum/7.jpg',
   ];
+
 
   const serializedImages = JSON.stringify(images);
 
+  document.getElementById('jsonprint').innerHTML = serializedImages;
   console.log(serializedImages);
 </script>
 </html>
