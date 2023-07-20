@@ -7,6 +7,7 @@ var contiqueResult;
 var monuResult;
 var allmonuResult;
 var allResult;
+var monuqueResult;
 
 const connection = mysql.createConnection({
     host: 'localhost',
@@ -51,7 +52,10 @@ connection.query(gimmeMonuInfos, (error, results) => {
 });
 
 const monumentIDs = [1, 11, 5];
-const gimmeAllMonuInfos = `SELECT * FROM monuments WHERE ID IN (${monumentIDs.join(',')}) LIMIT 3`;
+const gimmeAllMonuInfos = `SELECT *
+                           FROM monuments
+                           WHERE ID IN (${monumentIDs.join(',')})
+                           LIMIT 3`;
 
 connection.query(gimmeAllMonuInfos, (error, results) => {
     if (error) {
@@ -65,7 +69,8 @@ connection.query(gimmeAllMonuInfos, (error, results) => {
     }
 });
 
-const allMonu = `SELECT * FROM monuments`;
+const allMonu = `SELECT *
+                 FROM monuments`;
 
 connection.query(allMonu, (error, results) => {
     if (error) {
@@ -74,6 +79,28 @@ connection.query(allMonu, (error, results) => {
         allResult = results;
         console.log(allResult)
     }
+});
+
+app.get('/monuments/:monumentName', (req, res) => {
+    const monumentName = req.params.monumentName;
+    console.log('Monument Name:', monumentName);
+    const query = 'SELECT * FROM monuments WHERE name = ?';
+    connection.query(query, [monumentName], (error, results) => {
+        if (error) {
+            console.error('Error fetching monument details:', error);
+            return res.status(500).json({ error: 'An error occurred while fetching monument details' });
+        }
+        console.log('Monument Details:', results);
+        if (results.length === 0) {
+            // If no monument with the given name is found, return an appropriate response
+            return res.status(404).json({ error: 'Monument not found' });
+        }
+
+        const monumentDetails = results[0]; // Assuming you only expect one monument with the given name
+        console.log(results)
+        // Render the monument.ejs template with the fetched monument details
+        res.render('monument', { monumentDetails });
+    });
 });
 
 app.get('/continents', (req, res) => {
@@ -91,19 +118,22 @@ app.get('/continents', (req, res) => {
 });
 
 app.get('/monuments/:continentId', (req, res) => {
-  const continentId = req.params.continentId;
-  const query = `SELECT m.* FROM monuments AS m
-                 INNER JOIN countries AS c ON m.country_id = c.id
-                 WHERE c.continent_id = ?`;
-  connection.query(query, [continentId], (error, results) => {
-    if (error) {
-      console.error('Error fetching monuments:', error);
-      // Handle the error accordingly
-    } else {
-      res.json(results);
-    }
-  });
+    const continentId = req.params.continentId;
+    const query = `SELECT m.*
+                   FROM monuments AS m
+                            INNER JOIN countries AS c ON m.country_id = c.id
+                   WHERE c.continent_id = ?`;
+    connection.query(query, [continentId], (error, results) => {
+        if (error) {
+            console.error('Error fetching monuments:', error);
+            // Handle the error accordingly
+        } else {
+            res.json(results);
+        }
+    });
 });
+
+
 
 // Set the view engine to EJS
 app.set('view engine', 'ejs');
@@ -122,7 +152,7 @@ app.get('/contact', (req, res) => {
 });
 
 app.get('/test', (req, res) => {
-    res.render('layout/home_All', {monuResult, contiqueResult, allmonuResult, allResult});
+    res.render('monument', {monuResult, contiqueResult, allmonuResult, allResult, monuqueResult});
 });
 
 //Define a route for the Home page for /home and /
