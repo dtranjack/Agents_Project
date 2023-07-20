@@ -36,7 +36,7 @@ connection.query(gimmeContiInfos, (error, results) => {
     }
 });
 
-const gimmeMonuInfos = 'SELECT * FROM monument WHERE name IN (\'Halong Bay\', \'Colosseum\', \'Machu Picchu\')';
+const gimmeMonuInfos = 'SELECT * FROM monuments WHERE name IN (\'Halong Bay\', \'Colosseum\', \'Machu Picchu\')';
 
 connection.query(gimmeMonuInfos, (error, results) => {
     if (error) {
@@ -51,7 +51,7 @@ connection.query(gimmeMonuInfos, (error, results) => {
 });
 
 const monumentIDs = [1, 11, 5];
-const gimmeAllMonuInfos = `SELECT * FROM monument WHERE ID IN (${monumentIDs.join(',')}) LIMIT 3`;
+const gimmeAllMonuInfos = `SELECT * FROM monuments WHERE ID IN (${monumentIDs.join(',')}) LIMIT 3`;
 
 connection.query(gimmeAllMonuInfos, (error, results) => {
     if (error) {
@@ -65,7 +65,7 @@ connection.query(gimmeAllMonuInfos, (error, results) => {
     }
 });
 
-const allMonu = `SELECT * FROM monument`;
+const allMonu = `SELECT * FROM monuments`;
 
 connection.query(allMonu, (error, results) => {
     if (error) {
@@ -92,7 +92,7 @@ app.get('/continents', (req, res) => {
 
 app.get('/monuments/:continentId', (req, res) => {
   const continentId = req.params.continentId;
-  const query = `SELECT m.* FROM monument AS m
+  const query = `SELECT m.* FROM monuments AS m
                  INNER JOIN countries AS c ON m.country_id = c.id
                  WHERE c.continent_id = ?`;
   connection.query(query, [continentId], (error, results) => {
