@@ -4,13 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= monumentDetails.name %></title>
+    <link rel="icon" type="image/x-icon" href="IMG/spirals.png">
     <!-- Add any other necessary CSS or external resources here -->
 </head>
 <body>
 <h1><%= monumentDetails.name %></h1>
 <p><%= monumentDetails.description %></p>
+<a href="/download/<%= monumentDetails.name %>/pdf">Download as PDF</a>
+
 <img src="<%= monumentDetails.cover %>" alt="<%= monumentDetails.name %>">
 <!-- Display other details about the monument as needed -->
+<!-- Links for downloading the description -->
+
 
 <!-- Add any other HTML content for displaying the monument details here -->
 </body>

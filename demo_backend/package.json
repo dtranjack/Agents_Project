@@ -1,7 +1,10 @@
 {
   "dependencies": {
+    "docxtemplater": "^3.37.12",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
-    "mysql": "^2.18.1"
+    "html-pdf": "^3.0.1",
+    "mysql": "^2.18.1",
+    "pdfkit": "^0.13.0"
   }
 }

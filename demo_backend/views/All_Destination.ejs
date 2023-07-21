@@ -6,6 +6,7 @@
     <title>All Destination</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="IMG/spirals.png">
     <style>
         @import url('https://fonts.cdnfonts.com/css/gt-eesti-display-trial');
 
@@ -82,7 +83,7 @@
                             <img src="<%= monument.mini_background %>" class="card-img-top" alt="Destination Image">
                         </a>
                         <div class="card-body">
-                            <a href="#">
+                            <a href="/monuments/<%= monument.name %>" target="_blank">
                                 <h5 class="card-title"><%= monument.name %></h5>
                             </a>
                             <p class="card-text"><%= monument.short_description %></p>

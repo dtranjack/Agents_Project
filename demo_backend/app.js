@@ -2,6 +2,12 @@ const express = require('express');
 const mysql = require('mysql');
 const app = express();
 const port = 3000;
+const fs = require('fs');
+const path = require('path');
+const PDFDocument = require('pdfkit');
+const ejs = require('ejs');
+const pdf = require('html-pdf');
+const docxTemplater = require('docxtemplater');
 
 var contiqueResult;
 var monuResult;
@@ -10,6 +16,13 @@ var allResult;
 var monuqueResult;
 
 const connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '171198',
+    database: 'monument',
+});
+
+const connectionPool = mysql.createPool({
     host: 'localhost',
     user: 'root',
     password: '171198',
@@ -88,18 +101,18 @@ app.get('/monuments/:monumentName', (req, res) => {
     connection.query(query, [monumentName], (error, results) => {
         if (error) {
             console.error('Error fetching monument details:', error);
-            return res.status(500).json({ error: 'An error occurred while fetching monument details' });
+            return res.status(500).json({error: 'An error occurred while fetching monument details'});
         }
         console.log('Monument Details:', results);
         if (results.length === 0) {
             // If no monument with the given name is found, return an appropriate response
-            return res.status(404).json({ error: 'Monument not found' });
+            return res.status(404).json({error: 'Monument not found'});
         }
 
         const monumentDetails = results[0]; // Assuming you only expect one monument with the given name
         console.log(results)
         // Render the monument.ejs template with the fetched monument details
-        res.render('monument', { monumentDetails });
+        res.render('monument', {monumentDetails});
     });
 });
 
@@ -134,9 +147,51 @@ app.get('/monuments/:continentId', (req, res) => {
 });
 
 
-
 // Set the view engine to EJS
 app.set('view engine', 'ejs');
+
+function fetchMonumentDetailsByName(name) {
+    return new Promise((resolve, reject) => {
+        const query = 'SELECT * FROM monuments WHERE name = ?';
+        connection.query(query, [name], (error, results) => {
+            if (error) {
+                reject(error);
+            } else {
+                resolve(results[0]);
+            }
+        });
+    });
+}
+
+// Define a route to download monument description as PDF
+app.get('/download/:monumentName/pdf', async (req, res) => {
+    const monumentName = req.params.monumentName;
+    try {
+        // Fetch the monument description based on the name
+        const monumentDescription = await fetchMonumentDetailsByName(monumentName);
+        if (!monumentDescription) {
+            return res.status(404).json({ error: 'Monument not found' });
+        }
+
+        // Create a new PDF document
+        const pdfDoc = new PDFDocument();
+
+        // Pipe the PDF document to the response stream to initiate the download
+        res.setHeader('Content-Disposition', `attachment; filename="${monumentName}.pdf"`);
+        pdfDoc.pipe(res);
+
+        // Add the monument details to the PDF
+        pdfDoc.fontSize(20).text(monumentName, { align: 'center' });
+        pdfDoc.fontSize(12).text(monumentDescription.description);
+
+        // Finalize the PDF
+        pdfDoc.end();
+    } catch (error) {
+        console.error('Error fetching monument details:', error);
+        res.status(500).json({ error: 'An error occurred while fetching monument details' });
+    }
+});
+
 
 // Serve static files
 app.use(express.static(__dirname + '/public'));
