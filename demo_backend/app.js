@@ -8,12 +8,14 @@ const PDFDocument = require('pdfkit');
 const ejs = require('ejs');
 const pdf = require('html-pdf');
 const docxTemplater = require('docxtemplater');
+const bodyParser = require('body-parser');
 
 var contiqueResult;
 var monuResult;
 var allmonuResult;
 var allResult;
 var monuqueResult;
+var continentResult;
 
 const connection = mysql.createConnection({
     host: 'localhost',
@@ -87,25 +89,80 @@ connection.query(allMonu, (error, results) => {
     }
 });
 
+// Load the comments from the JSON file
+function loadComments() {
+    const commentsPath = path.join(__dirname, 'comments.json');
+    const commentsData = fs.readFileSync(commentsPath, 'utf8');
+    return JSON.parse(commentsData);
+}
+
+// Save the comments to the JSON file
+function saveComments(comments) {
+    const commentsPath = path.join(__dirname, 'comments.json');
+    fs.writeFileSync(commentsPath, JSON.stringify(comments, null, 2), 'utf8');
+}
+
+// Middleware to parse incoming form data
+app.use(bodyParser.urlencoded({extended: true}));
+
 app.get('/monuments/:monumentName', async (req, res) => {
     const monumentName = req.params.monumentName;
     try {
         // Fetch the monument details based on the name
         const monumentDetails = await fetchMonumentDetailsByName(monumentName);
         if (!monumentDetails) {
-            return res.status(404).json({ error: 'Monument not found' });
+            return res.status(404).json({error: 'Monument not found'});
         }
 
         // Fetch the gallery images for the monument
         const galleryImages = await fetchGalleryImagesByMonumentName(monumentName);
 
+        // Load comments from the JSON file for the specific monument
+        const comments = loadCommentsForMonument(monumentName);
+
         // Render the monument.ejs template with the fetched data
-        res.render('monument', { monumentDetails, galleryImages, monuResult, contiqueResult, allmonuResult, allResult, monuqueResult});
+        res.render('monument', {
+            monumentDetails,
+            galleryImages,
+            monuResult,
+            contiqueResult,
+            allmonuResult,
+            allResult,
+            monuqueResult,
+            comments // Pass the comments to the template
+        });
     } catch (error) {
         console.error('Error fetching monument details:', error);
-        res.status(500).json({ error: 'An error occurred while fetching monument details' });
+        res.status(500).json({error: 'An error occurred while fetching monument details'});
     }
 });
+
+// Route to handle comment submission
+app.post('/submit', (req, res) => {
+    // Destructure 'name', 'comment', and 'monumentName' from req.body
+    const {name, comment, monumentName} = req.body;
+
+    // Load existing comments from the JSON file
+    const comments = loadComments();
+
+    // Add the new comment to the comments array
+    comments.push({name, comment, monumentName});
+
+    // Save the updated comments back to the JSON file
+    saveComments(comments);
+
+    // Redirect back to the monument page after submission
+    res.redirect(`/monuments/${monumentName}`);
+});
+
+function loadCommentsForMonument(monumentName) {
+    // Load all comments from the JSON file
+    const allComments = loadComments();
+
+    // Filter and return comments for the specific monument
+    return allComments.filter((comment) => comment.monumentName === monumentName);
+}
+
 
 function fetchGalleryImagesByMonumentName(name) {
     return new Promise((resolve, reject) => {
@@ -133,7 +190,7 @@ app.get("/gallery/:monumentName", (req, res) => {
         // Prefix the image paths with the /gallery route
         const galleryImagesWithRoute = galleryImages.map(imagePath => `/gallery${imagePath}`);
 
-        res.render("monument", { monumentDetails: { name: monumentName }, galleryImages: galleryImagesWithRoute });
+        res.render("monument", {monumentDetails: {name: monumentName}, galleryImages: galleryImagesWithRoute});
     });
 });
 
@@ -168,6 +225,63 @@ app.get('/monuments/:continentId', (req, res) => {
     });
 });
 
+// Define a route for /continents without a specific continent name
+app.get('/continents', (req, res) => {
+    // Render a default page or redirect to a specific URL
+    res.render('notFound');
+});
+
+// Define a route for each continent based on the continent name
+app.get('/continents/:continentName', async (req, res) => {
+    const continentName = req.params.continentName;
+
+    try {
+        // Check if the continent exists in the database
+        const continentQuery = 'SELECT * FROM continents WHERE name = ?';
+        connection.query(continentQuery, [continentName], async (error, results) => {
+            if (error) {
+                console.error('Error fetching continent details:', error);
+                return res.status(500).json({error: 'An error occurred while fetching continent details'});
+            }
+
+            if (results.length === 0) {
+                // Continent not found, render the "invalidContinent.ejs" template
+                return res.status(404).render('invalidContinent');
+            }
+
+            // Fetch the monuments belonging to the continent based on the continent ID
+            const continentId = results[0].ID;
+            const monumentsQuery = `SELECT m.*
+                                    FROM monuments AS m
+                                             INNER JOIN countries AS c ON m.country_id = c.id
+                                             INNER JOIN continents AS cn ON c.continent_id = cn.id
+                                    WHERE cn.name = ?`;
+
+            connection.query(monumentsQuery, [continentName], (error, monuments) => {
+                if (error) {
+                    console.error('Error fetching monuments:', error);
+                    return res.status(500).json({error: 'An error occurred while fetching monuments'});
+                }
+
+                continentResult = monuments;
+
+                // Render the "continent.ejs" template with the fetched monuments
+                res.render('continent', {
+                    continentResult, continentName, monuResult, contiqueResult, allmonuResult, allResult
+                });
+            });
+        });
+    } catch (error) {
+        console.error('Error fetching continent details:', error);
+        res.status(500).json({error: 'An error occurred while fetching continent details'});
+    }
+});
+
+
+// Define a route to handle invalid continent names
+app.get('/continents/*', (req, res) => {
+    res.render('invalidContinent');
+});
 
 // Set the view engine to EJS
 app.set('view engine', 'ejs');
@@ -192,7 +306,7 @@ app.get('/download/:monumentName/pdf', async (req, res) => {
         // Fetch the monument description based on the name
         const monumentDescription = await fetchMonumentDetailsByName(monumentName);
         if (!monumentDescription) {
-            return res.status(404).json({ error: 'Monument not found' });
+            return res.status(404).json({error: 'Monument not found'});
         }
 
         // Create a new PDF document
@@ -203,22 +317,49 @@ app.get('/download/:monumentName/pdf', async (req, res) => {
         pdfDoc.pipe(res);
 
         // Add the monument details to the PDF
-        pdfDoc.fontSize(20).text(monumentName, { align: 'center' });
+        pdfDoc.fontSize(20).text(monumentName, {align: 'center'});
         pdfDoc.fontSize(12).text(monumentDescription.description);
 
         // Finalize the PDF
         pdfDoc.end();
     } catch (error) {
         console.error('Error fetching monument details:', error);
-        res.status(500).json({ error: 'An error occurred while fetching monument details' });
+        res.status(500).json({error: 'An error occurred while fetching monument details'});
     }
+});
+
+app.get('/search', (req, res) => {
+    const searchTerm = req.query.term; // Get the search term from the query parameters
+    const query = 'SELECT * FROM monuments WHERE name LIKE ?'; // Use LIKE to perform a partial match search
+    const searchValue = `%${searchTerm}%`; // Add '%' at the beginning and end to match any substring
+
+    connection.query(query, [searchValue], (error, results) => {
+        if (error) {
+            console.error('Error executing query:', error);
+            res.status(500).json({error: 'Internal server error'});
+        } else {
+            // Send the search results as a JSON response
+            res.json(results);
+        }
+    });
 });
 
 
 // Serve static files
 app.use(express.static(__dirname + '/public'));
 
+// Load the comments from the JSON file
+function loadComments() {
+    const commentsPath = path.join(__dirname, 'comments.json');
+    const commentsData = fs.readFileSync(commentsPath, 'utf8');
+    return JSON.parse(commentsData);
+}
 
+// Save the comments to the JSON file
+function saveComments(comments) {
+    const commentsPath = path.join(__dirname, 'comments.json');
+    fs.writeFileSync(commentsPath, JSON.stringify(comments, null, 2), 'utf8');
+}
 
 // Define a route for the About Us page
 app.get('/about', (req, res) => {

@@ -45,6 +45,11 @@
             height: 100%;
         }
 
+        hr.solid {
+            border-top: 8px solid #000000;
+            border-radius: 5px;
+        }
+
         .text-overlay {
             position: absolute;
             top: 50%;
@@ -109,6 +114,16 @@
             font-size: 20px;
         }
 
+        .feedbacks {
+            padding: 16px;
+            border-style: hidden hidden hidden double;
+            border-color: crimson;
+            border-width: 5px;
+            border-radius: 12px;
+            background-color: #c7e2ff;
+            font-size: 20px;
+        }
+
         .comment-box {
             margin-top: 50px;
         }
@@ -117,7 +132,17 @@
             margin-bottom: 50px;
         }
 
+        .comments {
+            margin-bottom: 50px;
+            margin-top: 50px;
+        }
+
         .comment-box h2 {
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        .comment h2 {
             margin-bottom: 20px;
             color: #007bff;
         }
@@ -313,19 +338,43 @@
 </section>
 
 <section class="comment">
+    <!-- Comment Box -->
     <div class="container comment-box">
-        <h2>Comments</h2>
-        <form>
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" placeholder="Enter your name">
-            </div>
-            <div class="form-group">
-                <label for="comment">Comment</label>
-                <textarea class="form-control" id="comment" rows="4" placeholder="Enter your comment"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+        <h2>Leave a Comment</h2>
+        <!-- monument.ejs -->
+        <form action="/submit" method="POST">
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name" required>
+            <br>
+            <label for="comment">Comment:</label>
+            <textarea name="comment" id="comment" rows="4" required></textarea>
+            <!-- Add a hidden input to store the monumentName -->
+            <input type="hidden" name="monumentName" value="<%= monumentDetails.name %>">
+            <br>
+            <input type="submit" value="Submit" class="btn btn-primary">
         </form>
+
+    </div>
+
+    <!-- Comments Section -->
+    <div class="container comments">
+        <h2>What people are saying about <%= monumentDetails.name %></h2>
+        <div class="feedbacks">
+        <% if (comments.length === 0) { %>
+            <p>No comments yet.</p>
+        <% } else { %>
+            <ul>
+                <% comments.forEach((comment) => { %>
+                    <li>
+                        <p>
+                            <strong><%= comment.name %>:</strong> <%= comment.comment %>
+                        </p>
+                        <hr class="solid">
+                    </li>
+                <% }); %>
+            </ul>
+        <% } %>
+        </div>
     </div>
 </section>
 

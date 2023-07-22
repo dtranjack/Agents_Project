@@ -3,26 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../public/CSS/magnific-popup.css">
-    <title>Gallery</title>
+    <title>Comment Box</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.0-beta3/css/bootstrap.min.css">
+    <!-- Lightbox2 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="/CSS/magnific-popup.css">
+    <link rel="stylesheet" href="/CSS/NavBar.css">
+    <link rel="stylesheet" href="/CSS/Footer.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.0-beta3/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+    <script src="/JS/jquery.magnific-popup.js"></script>
 </head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    .comment-box {
+        max-width: 500px;
+        margin: 20px auto;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .comments {
+        max-width: 500px;
+        margin: 20px auto;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    li {
+        margin-bottom: 10px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+</style>
 <body>
-<div class="container">
-    <div class="row" id="image-gallery">
-        <% galleryImages.forEach(imageURL => { %>
-            <div class="col-md-4 col-sm-6 mb-4">
-                <a href="<%= imageURL %>" class="image-link">
-                    <img src="<%= imageURL %>" class="img-fluid rounded" alt="Gallery Image">
-                </a>
-            </div>
-        <% }); %>
-    </div>
+<h1>Comment Box</h1>
+
+<div class="comment-box">
+    <h2>Leave a Comment</h2>
+    <form action="/submit" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" required>
+        <br>
+        <label for="comment">Comment:</label>
+        <textarea name="comment" id="comment" rows="4" required></textarea>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="../public/JS/jquery.magnific-popup.js"></script>
+<div class="comments">
+    <h2>Comments</h2>
+    <% if (comments.length === 0) { %>
+        <p>No comments yet.</p>
+    <% } else { %>
+        <ul>
+            <% comments.forEach((comment) => { %>
+                <li>
+                    <strong><%= comment.name %>:</strong> <%= comment.comment %>
+                </li>
+            <% }); %>
+        </ul>
+    <% } %>
+</div>
 </body>
 </html>

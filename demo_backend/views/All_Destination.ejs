@@ -79,7 +79,7 @@
             <% allResult.forEach((monument) => { %>
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card">
-                        <<a href="/monuments/<%= monument.name %>" target="_blank">
+                        <a href="/monuments/<%= monument.name %>" target="_blank">
                             <img src="<%= monument.mini_background %>" class="card-img-top" alt="Destination Image">
                         </a>
                         <div class="card-body">
@@ -88,7 +88,6 @@
                             </a>
                             <p class="card-text"><%= monument.short_description %></p>
                         </div>
-
                     </div>
                 </div>
             <% }) %>
