@@ -1,0 +1,13 @@
+ID Name	Country	Continent
+
+1.  Great wall of China - China - Asia
+2.  Petra - Jordan - Asia
+3.  Christ the Redeemer Statue - Brazil - South America
+4.  Machu Picchu - Peru - South America
+5.  Chichen Itza - Mexico - North America
+6.  Colosseum - Italy - Europe
+7.  Taj Mahal - India - Asia
+8.  Statue of Liberty - USA - North America
+9.  Arc de Triomphe - France - Europe
+10. Halong Bay - Viet Nam - Asia
+11. Ho Chi Minh Mausoleum - Viet Nam - Asia

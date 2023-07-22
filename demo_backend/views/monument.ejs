@@ -4,20 +4,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= monumentDetails.name %></title>
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta3/css/bootstrap.min.css">
+    <!-- Lightbox2 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link  rel="stylesheet" href="/CSS/magnific-popup.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+    <script src="/JS/jquery.magnific-popup.js"></script>
+    <style>
+        /* Add your custom CSS for the gallery here */
+        .gallery-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: space-between; /* This will create space between images */
+            max-width: 960px; /* Limit the width of the gallery */
+            margin: 0 auto; /* Center the gallery on the page */
+        }
+
+        .gallery-item {
+            flex-basis: calc(33.33% - 10px); /* Distribute equally with gaps (3 images per row) */
+            max-width: calc(33.33% - 10px);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 200px; /* Set a fixed height for the images */
+            object-fit: cover; /* Maintain aspect ratio and cover the container */
+            cursor: pointer;
+        }
+    </style>
+
+
 </head>
 <body>
+
 <h1><%= monumentDetails.name %></h1>
 <p><%= monumentDetails.description %></p>
 <a href="/download/<%= monumentDetails.name %>/pdf">Download as PDF</a>
 <br>
-<img src="<%= monumentDetails.cover %>" alt="<%= monumentDetails.name %>">
-<!-- Display other details about the monument as needed -->
-<!-- Links for downloading the description -->
+<div class="container gallery">
+    <div class="row gallery-container" id="image-gallery">
+        <% galleryImages.forEach((imagePath, index) => { %>
+            <div class="col-md-4 col-sm-6 mb-4 gallery-item">
+                <a href="<%= imagePath %>" data-lightbox="gallery" data-title="Image <%= index + 1 %>">
+                    <img src="<%= imagePath %>" class="img-fluid rounded" alt="Image <%= index + 1 %>">
+                </a>
+            </div>
+        <% }); %>
+    </div>
+</div>
 
+<!-- The modal -->
+<div class="modal fade" id="image-modal" tabindex="-1" role="dialog">
+    <!-- ... Rest of your modal content ... -->
+</div>
 
-<!-- Add any other HTML content for displaying the monument details here -->
+<script>
+    // Initialize Magnific Popup
+    $('#image-gallery').magnificPopup({
+        delegate: 'a',
+        type: 'image',
+        gallery: {
+            enabled: true
+        },
+        // Close on outside click
+        closeOnContentClick: true,
+        // Enable keyboard navigation
+        enableKeyboardNavigation: true,
+        // Enable smooth sliding transition
+        mainClass: 'mfp-zoom-in',
+        removalDelay: 300,
+        // Customize other options as per your preference
+    });
+</script>
 </body>
 </html>

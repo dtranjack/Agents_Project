@@ -22,13 +22,6 @@ const connection = mysql.createConnection({
     database: 'monument',
 });
 
-const connectionPool = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    password: '171198',
-    database: 'monument',
-});
-
 connection.connect((err) => {
     if (err) {
         console.error('Error connecting to the database:', err);
@@ -94,27 +87,56 @@ connection.query(allMonu, (error, results) => {
     }
 });
 
-app.get('/monuments/:monumentName', (req, res) => {
+app.get('/monuments/:monumentName', async (req, res) => {
     const monumentName = req.params.monumentName;
-    console.log('Monument Name:', monumentName);
-    const query = 'SELECT * FROM monuments WHERE name = ?';
-    connection.query(query, [monumentName], (error, results) => {
-        if (error) {
-            console.error('Error fetching monument details:', error);
-            return res.status(500).json({error: 'An error occurred while fetching monument details'});
-        }
-        console.log('Monument Details:', results);
-        if (results.length === 0) {
-            // If no monument with the given name is found, return an appropriate response
-            return res.status(404).json({error: 'Monument not found'});
+    try {
+        // Fetch the monument details based on the name
+        const monumentDetails = await fetchMonumentDetailsByName(monumentName);
+        if (!monumentDetails) {
+            return res.status(404).json({ error: 'Monument not found' });
         }
 
-        const monumentDetails = results[0]; // Assuming you only expect one monument with the given name
-        console.log(results)
-        // Render the monument.ejs template with the fetched monument details
-        res.render('monument', {monumentDetails});
+        // Fetch the gallery images for the monument
+        const galleryImages = await fetchGalleryImagesByMonumentName(monumentName);
+
+        // Render the monument.ejs template with the fetched data
+        res.render('monument', { monumentDetails, galleryImages });
+    } catch (error) {
+        console.error('Error fetching monument details:', error);
+        res.status(500).json({ error: 'An error occurred while fetching monument details' });
+    }
+});
+
+function fetchGalleryImagesByMonumentName(name) {
+    return new Promise((resolve, reject) => {
+        const query = 'SELECT img_path FROM gallery WHERE name = ?';
+        connection.query(query, [name], (error, results) => {
+            if (error) {
+                reject(error);
+            } else {
+                // Parse the JSON data in the img_path column and return the array of image paths
+                const imagePaths = JSON.parse(results[0].img_path);
+                resolve(imagePaths);
+            }
+        });
+    });
+}
+
+app.get("/gallery/:monumentName", (req, res) => {
+    // Fetch data from MySQL database
+    const monumentName = req.params.monumentName;
+    const sql = "SELECT img_path FROM gallery WHERE name = ?";
+    connection.query(sql, [monumentName], (err, results) => {
+        if (err) throw err;
+        const galleryImages = JSON.parse(results[0].img_path);
+
+        // Prefix the image paths with the /gallery route
+        const galleryImagesWithRoute = galleryImages.map(imagePath => `/gallery${imagePath}`);
+
+        res.render("monument", { monumentDetails: { name: monumentName }, galleryImages: galleryImagesWithRoute });
     });
 });
+
 
 app.get('/continents', (req, res) => {
     // Perform the database query to fetch continents data
@@ -195,6 +217,8 @@ app.get('/download/:monumentName/pdf', async (req, res) => {
 
 // Serve static files
 app.use(express.static(__dirname + '/public'));
+
+
 
 // Define a route for the About Us page
 app.get('/about', (req, res) => {
