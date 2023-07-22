@@ -100,7 +100,7 @@ app.get('/monuments/:monumentName', async (req, res) => {
         const galleryImages = await fetchGalleryImagesByMonumentName(monumentName);
 
         // Render the monument.ejs template with the fetched data
-        res.render('monument', { monumentDetails, galleryImages });
+        res.render('monument', { monumentDetails, galleryImages, monuResult, contiqueResult, allmonuResult, allResult, monuqueResult});
     } catch (error) {
         console.error('Error fetching monument details:', error);
         res.status(500).json({ error: 'An error occurred while fetching monument details' });
@@ -231,6 +231,10 @@ app.get('/contact', (req, res) => {
 });
 
 app.get('/test', (req, res) => {
+    res.render('layout/NavBar', {monuResult, contiqueResult, allmonuResult, allResult, monuqueResult});
+});
+
+app.get('/monudb', (req, res) => {
     res.render('monument', {monuResult, contiqueResult, allmonuResult, allResult, monuqueResult});
 });
 
