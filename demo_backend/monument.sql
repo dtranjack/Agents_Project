@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Generation Time: Jul 20, 2023 at 12:26 PM
+-- Generation Time: Jul 22, 2023 at 07:23 AM
 -- Server version: 11.0.2-MariaDB-1:11.0.2+maria~ubu2204
 -- PHP Version: 8.1.20
 
@@ -91,16 +91,16 @@ CREATE TABLE `gallery` (
 --
 
 INSERT INTO `gallery` (`ID`, `name`, `img_path`, `monu_ID`) VALUES
-(1, 'Petra', '[\"IMG/Petra/1.jpg\",\"IMG/Petra/2.jpg\",\"IMG/Petra/3.jpg\",\"IMG/Petra/4.jpg\",\"IMG/Petra/5.jpg\"]', 2),
+(1, 'Petra', '[\"IMG/Petra/1.jpg\",\"IMG/Petra/2.jpg\",\"IMG/Petra/3.jpg\",\"IMG/Petra/4.jpg\",\"IMG/Petra/5.jpg\",\"IMG/Petra/6.jpg\"]', 2),
 (2, 'Great Wall of China', '[\"IMG/Greatwall_of_China/1.jpg\",\"IMG/Greatwall_of_China/2.jpg\",\"IMG/Greatwall_of_China/3.jpg\",\"IMG/Greatwall_of_China/4.jpg\",\"IMG/Greatwall_of_China/5.jpg\",\"IMG/Greatwall_of_China/6.jpg\"]', 1),
 (3, 'Christ the Redeemer Statue', '[\"IMG/Christ_the_Redeemer_statue/1.jpg\",\"IMG/Christ_the_Redeemer_statue/2.jpg\",\"IMG/Christ_the_Redeemer_statue/3.jpg\",\"IMG/Christ_the_Redeemer_statue/4.jpg\",\"IMG/Christ_the_Redeemer_statue/5.jpg\",\"IMG/Christ_the_Redeemer_statue/6.jpg\"]', 3),
-(4, 'Machu Picchu', '[\"IMG/Machu_Picchu/1.jpg\",\"IMG/Machu_Picchu/2.jpg\",\"IMG/Machu_Picchu/3.jpg\",\"IMG/Machu_Picchu/4.jpg\",\"IMG/Machu_Picchu/5.jpg\"]', 4),
-(5, 'Chichen Itza', '[\"IMG/Chichen_Itza/1.jpg\",\"IMG/Chichen_Itza/2.jpg\",\"IMG/Chichen_Itza/3.jpg\",\"IMG/Chichen_Itza/4.jpg\",\"IMG/Chichen_Itza/5.jpg\",\"IMG/Chichen_Itza/6.jpg\",\"IMG/Chichen_Itza/7.jpg\",\"IMG/Chichen_Itza/8.jpg\"]', 5),
+(4, 'Machu Picchu', '[\"IMG/Machu_Picchu/1.jpg\",\"IMG/Machu_Picchu/2.jpg\",\"IMG/Machu_Picchu/3.jpg\",\"IMG/Machu_Picchu/4.png\",\"IMG/Machu_Picchu/5.jpg\",\"IMG/Machu_Picchu/6.jpg\"]', 4),
+(5, 'Chichen Itza', '[\"IMG/Chichen_Itza/1.jpg\",\"IMG/Chichen_Itza/2.jpg\",\"IMG/Chichen_Itza/3.jpg\",\"IMG/Chichen_Itza/4.jpg\",\"IMG/Chichen_Itza/5.jpg\",\"IMG/Chichen_Itza/6.jpg\",\"IMG/Chichen_Itza/7.jpg\",\"IMG/Chichen_Itza/8.jpg\",\"IMG/Chichen_Itza/9.jpg\"]', 5),
 (6, 'Colosseum', '[\"IMG/Colosseum/1.jpg\",\"IMG/Colosseum/2.jpg\",\"IMG/Colosseum/3.jpg\",\"IMG/Colosseum/4.jpg\",\"IMG/Colosseum/5.jpg\",\"IMG/Colosseum/6.jpg\",\"IMG/Colosseum/7.jpg\",\"IMG/Colosseum/8.jpg\",\"IMG/Colosseum/9.jpg\",\"IMG/Colosseum/10.jpg\"]', 6),
-(7, 'Taj Mahal', '[\"IMG/Taj_Mahal/1.jpg\",\"IMG/Taj_Mahal/2.jpg\",\"IMG/Taj_Mahal/3.jpg\",\"IMG/Taj_Mahal/4.jpg\",\"IMG/Taj_Mahal/5.jpg\",\"IMG/Taj_Mahal/6.jpg\",\"IMG/Taj_Mahal/7.jpg\",\"IMG/Taj_Mahal/8.jpg\"]', 7),
+(7, 'Taj Mahal', '[\"IMG/Taj_Mahal/1.jpg\",\"IMG/Taj_Mahal/2.jpg\",\"IMG/Taj_Mahal/3.jpg\",\"IMG/Taj_Mahal/4.jpg\",\"IMG/Taj_Mahal/5.jpg\",\"IMG/Taj_Mahal/6.jpg\",\"IMG/Taj_Mahal/7.jpg\",\"IMG/Taj_Mahal/8.jpg\",\"IMG/Taj_Mahal/9.jpg\"]', 7),
 (8, 'Statue of Liberty', '[\"IMG/Statue_of_Liberty/1.jpg\",\"IMG/Statue_of_Liberty/2.jpg\",\"IMG/Statue_of_Liberty/3.jpg\",\"IMG/Statue_of_Liberty/4.jpg\",\"IMG/Statue_of_Liberty/5.jpg\",\"IMG/Statue_of_Liberty/6.jpg\",\"IMG/Statue_of_Liberty/7.jpg\"]', 8),
 (9, 'Arc de Triomphe', '[\"IMG/Arc_de_Triomphe/1.jpg\",\"IMG/Arc_de_Triomphe/2.jpg\",\"IMG/Arc_de_Triomphe/3.jpg\",\"IMG/Arc_de_Triomphe/4.jpg\",\"IMG/Arc_de_Triomphe/5.jpg\",\"IMG/Arc_de_Triomphe/6.jpg\",\"IMG/Arc_de_Triomphe/7.jpg\",\"IMG/Arc_de_Triomphe/8.jpg\",\"IMG/Arc_de_Triomphe/9.jpg\"]', 9),
-(10, 'Halong Bay', '[\"IMG/Halong_Bay/1.jpg\",\"IMG/Halong_Bay/2.jpg\",\"IMG/Halong_Bay/3.jpg\",\"IMG/Halong_Bay/4.jpg\",\"IMG/Halong_Bay/5.jpg\",\"IMG/Halong_Bay/6.jpg\",\"IMG/Halong_Bay/7.jpg\",\"IMG/Halong_Bay/8.jpg\",\"IMG/Halong_Bay/9.jpg\",\"IMG/Halong_Bay/10.jpg\",\"IMG/Halong_Bay/11.jpg\"]', 10),
+(10, 'Halong Bay', '[\"IMG/Halong_Bay/1.jpg\",\"IMG/Halong_Bay/2.jpg\",\"IMG/Halong_Bay/3.jpg\",\"IMG/Halong_Bay/4.jpg\",\"IMG/Halong_Bay/5.jpg\",\"IMG/Halong_Bay/6.jpg\",\"IMG/Halong_Bay/7.jpg\",\"IMG/Halong_Bay/8.jpg\",\"IMG/Halong_Bay/9.jpg\",\"IMG/Halong_Bay/10.jpg\",\"IMG/Halong_Bay/11.jpg\",\"IMG/Halong_Bay/12.jpg\"]', 10),
 (11, 'Ho Chi Minh Mausoleum', '[\"IMG/HCM_Mausoleum/1.jpg\",\"IMG/HCM_Mausoleum/2.jpg\",\"IMG/HCM_Mausoleum/3.jpg\",\"IMG/HCM_Mausoleum/4.jpg\",\"IMG/HCM_Mausoleum/5.jpg\",\"IMG/HCM_Mausoleum/6.jpg\",\"IMG/HCM_Mausoleum/7.jpg\"]', 11);
 
 -- --------------------------------------------------------

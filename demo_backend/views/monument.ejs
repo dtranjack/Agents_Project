@@ -13,6 +13,71 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
     <script src="/JS/jquery.magnific-popup.js"></script>
     <style>
+        html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 1200px;
+        }
+
+        .header-container {
+            display: flex;
+            flex-direction: column;
+            height: calc(100vh - 56px);
+            /* Subtract the height of the navbar */
+        }
+
+        .img-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .img-container img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+
+        .text-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 1;
+        }
+
+        .text-overlay h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .text-overlay p {
+            font-size: 18px;
+            margin-bottom: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Description section styles */
+        .description {
+            margin-top: 50px;
+        }
+
+        .description h2 {
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
         /* Add your custom CSS for the gallery here */
         .gallery-container {
             display: flex;
