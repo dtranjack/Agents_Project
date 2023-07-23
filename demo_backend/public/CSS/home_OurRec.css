@@ -14,12 +14,14 @@ div.OurRec .card-img-top {
     object-fit: cover;
     height: 250px;
     transition: transform 0.3s ease;
+    border: none;
 }
 
 div.OurRec .card:hover .card-img-top {
     transform: scale(1.1);
     overflow: hidden;
     height: 250px;
+    border: none;
 }
 
 div.OurRec .card-body {

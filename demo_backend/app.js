@@ -15,7 +15,7 @@ var monuResult;
 var allmonuResult;
 var allResult;
 var monuqueResult;
-var continentResult;
+var searchingTerm;
 
 const connection = mysql.createConnection({
     host: 'localhost',
@@ -103,6 +103,7 @@ function saveComments(comments) {
 }
 
 // Middleware to parse incoming form data
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.get('/monuments/:monumentName', async (req, res) => {
@@ -163,6 +164,40 @@ function loadCommentsForMonument(monumentName) {
     return allComments.filter((comment) => comment.monumentName === monumentName);
 }
 
+// Endpoint to handle the newsletter subscription form submission
+app.post('/subscribe', (req, res) => {
+    const { email } = req.body;
+
+    if (!email) {
+        return res.status(400).json({ error: 'Email is required.' });
+    }
+
+    // Save the email to a JSON file
+    fs.readFile('user_newsletter_email.json', 'utf8', (err, data) => {
+        if (err) {
+            // If the file doesn't exist, create a new array
+            const emails = [email];
+            fs.writeFile('user_newsletter_email.json', JSON.stringify(emails), 'utf8', (err) => {
+                if (err) {
+                    console.error('Error writing to the file:', err);
+                }
+                console.log('Email added and file created.');
+                res.redirect('/home'); // Redirect to the home page after successful subscription
+            });
+        } else {
+            // If the file exists, append the new email to the array
+            const emails = JSON.parse(data);
+            emails.push(email);
+            fs.writeFile('user_newsletter_email.json', JSON.stringify(emails), 'utf8', (err) => {
+                if (err) {
+                    console.error('Error writing to the file:', err);
+                }
+                console.log('Email added to the file.');
+                res.redirect('/home'); // Redirect to the home page after successful subscription
+            });
+        }
+    });
+});
 
 function fetchGalleryImagesByMonumentName(name) {
     return new Promise((resolve, reject) => {
@@ -194,6 +229,29 @@ app.get("/gallery/:monumentName", (req, res) => {
     });
 });
 
+// Route to handle search form submission
+app.get('/searchResult', (req, res) => {
+    const searchTerm = req.query.term; // Get the search term from the query parameters
+    const query = `SELECT m.*, c.name AS continentName
+                   FROM monuments AS m
+                   LEFT JOIN countries AS co ON m.country_id = co.id
+                   LEFT JOIN continents AS c ON co.continent_id = c.id
+                   WHERE m.name LIKE ? OR c.name LIKE ? OR co.name LIKE ?`; // Perform a partial match search for monument name, continent name, and country name
+
+    const searchValue = `%${searchTerm}%`; // Add '%' at the beginning and end to match any substring
+
+    connection.query(query, [searchValue, searchValue, searchValue], (error, results) => {
+        if (error) {
+            console.error('Error executing query:', error);
+            res.status(500).json({ error: 'Internal server error' });
+        } else {
+            const count = results.length;
+            searchingTerm = searchTerm;
+            // Render the searchResult.ejs template with the search results
+            res.render('searchResult', { count, monuments: results, searchingTerm, monuResult, contiqueResult, allmonuResult, allResult, monuqueResult });
+        }
+    });
+});
 
 app.get('/continents', (req, res) => {
     // Perform the database query to fetch continents data
@@ -358,16 +416,16 @@ function saveComments(comments) {
 
 // Define a route for the About Us page
 app.get('/about', (req, res) => {
-    res.render('About_Us');
+    res.render('About_Us', {monuResult, contiqueResult, allmonuResult, allResult, monuqueResult});
 });
 
 // Define a route for the Contact Us page
 app.get('/contact', (req, res) => {
-    res.render('Contact_Us');
+    res.render('Contact_Us', {monuResult, contiqueResult, allmonuResult, allResult, monuqueResult});
 });
 
 app.get('/test', (req, res) => {
-    res.render('TestEJS', {monuResult, contiqueResult, allmonuResult, allResult, monuqueResult});
+    res.render('layout/NavBar', {monuResult, contiqueResult, allmonuResult, allResult, monuqueResult});
 });
 
 app.get('/monudb', (req, res) => {

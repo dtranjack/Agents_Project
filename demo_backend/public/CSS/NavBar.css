@@ -26,3 +26,8 @@
         justify-content: flex-end;
     }
 }
+
+.no-bullets {
+    list-style: none;
+    padding-left: 0; /* Optional: Remove default left padding */
+}
