@@ -4,41 +4,151 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= continentName.name %> Monuments</title>
+    <title><%= continentResult[0].continentName %></title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.0-beta3/css/bootstrap.min.css">
+    <link rel="icon" type="image/x-icon" href="/IMG/spirals.png">
     <style>
-        /* Your custom styles here */
+        @import url('https://fonts.cdnfonts.com/css/gt-eesti-display-trial');
+
+        .card {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: 'GT Eesti Display Trial', sans-serif;
+        }
+
+        .card-img-top {
+            object-fit: cover;
+            height: 250px;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover .card-img-top {
+            transform: scale(1.1);
+            overflow: hidden;
+            height: 250px;
+        }
+
+        .card-body {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .card-text {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            flex-grow: 1;
+        }
+
+        .card a {
+            text-decoration: none;
+        }
+
+        .header-container {
+            display: flex;
+            flex-direction: column;
+            height: 70vh;
+        }
+
+        .img-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .img-container img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .text-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 1;
+        }
+
+        .text-overlay h1 {
+            font-size: 40px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .text-overlay p {
+            font-size: 18px;
+            margin-bottom: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .text-overlay {
+            padding: 20px;
+        }
     </style>
 </head>
 
 <body>
-
+<div class="header-container">
+    <div class="img-container">
+        <img src="<%= continentResult[0].continentCover %>" alt="<%= continentResult[0].continentName %>">
+        <div class="text-overlay animated-overlay">
+            <h1>Explore the wonders of <%= continentResult[0].continentName %></h1>
+        </div>
+    </div>
+</div>
 <div class="container mt-4">
-    <h1><%= continentName.name %> Monuments</h1>
-    <% if (continentResult.length === 0) { %>
-        <p>No monument found for this continent at the moment</p>
-    <% } else { %>
-        <div class="row">
-            <% continentResult.forEach((monument) => { %>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card">
-                        <a href="/monuments/<%= monument.name %>" target="_blank">
-                            <img src="<%= monument.mini_background %>" class="card-img-top" alt="Destination Image">
-                        </a>
-                        <div class="card-body">
+    <div class="container mt-4">
+        <h2><%= continentResult[0].continentName %></h2>
+        <% if (continentResult.length === 0) { %>
+            <p>No monument found for this continent at the moment</p>
+        <% } else { %>
+            <div class="row">
+                <% continentResult.forEach((monument) => { %>
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card">
                             <a href="/monuments/<%= monument.name %>" target="_blank">
-                                <h5 class="card-title"><%= monument.name %></h5>
+                                <img src="<%= monument.mini_background %>" class="card-img-top"
+                                     alt="Destination Image">
                             </a>
-                            <p class="card-text"><%= monument.short_description %></p>
+                            <div class="card-body">
+                                <a href="/monuments/<%= monument.name %>" target="_blank">
+                                    <h5 class="card-title"><%= monument.name %></h5>
+                                </a>
+                                <p class="card-text"><%= monument.short_description %></p>
+                            </div>
                         </div>
                     </div>
-                </div>
-            <% }) %>
-        </div>
-    <% } %>
+                <% }) %>
+            </div>
+        <% } %>
+    </div>
 </div>
 
+<script>
+    // Serialize the continentResult to JSON and pass it to the client-side script
+    var continentResult = <%- JSON.stringify(continentResult) %>;
+    console.log(continentResult);
+</script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.0-beta3/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>

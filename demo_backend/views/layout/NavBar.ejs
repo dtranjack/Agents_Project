@@ -53,43 +53,6 @@
         </div>
     </div>
 </nav>
-<script>
-    // Function to handle autocomplete
-    function autocompleteSearch() {
-        const searchInput = document.getElementById('searchInput');
-        searchInput.addEventListener('input', () => {
-            const searchTerm = searchInput.value.trim();
-            if (searchTerm === '') {
-                return; // Do not perform a search if the input is empty
-            }
-
-            // Perform an AJAX request to the search API endpoint
-            fetch(`/search?term=${searchTerm}`)
-                .then(response => response.json())
-                .then(data => {
-                    // Process the search results and display them as suggestions in the autocomplete
-                    const autocompleteList = document.getElementById('autocompleteList');
-                    autocompleteList.innerHTML = '';
-
-                    data.forEach(monument => {
-                        const option = document.createElement('li');
-                        option.textContent = monument.name;
-                        option.addEventListener('click', () => {
-                            // Redirect to the page of the selected monument
-                            window.location.href = `/monuments/${encodeURIComponent(monument.name)}`;
-                        });
-                        autocompleteList.appendChild(option);
-                    });
-                })
-                .catch(error => {
-                    console.error('Error fetching search results:', error);
-                });
-        });
-    }
-
-    // Call the autocompleteSearch function when the DOM is loaded
-    document.addEventListener('DOMContentLoaded', autocompleteSearch);
-</script>
 <script src="https://code.angularjs.org/1.8.2/angular.min.js"></script>
 <script src="https://code.angularjs.org/1.8.2/angular-sanitize.min.js"></script>
 <script src="JS/dropdown_menu.destinations.angular.js"></script>

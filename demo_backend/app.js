@@ -225,12 +225,6 @@ app.get('/monuments/:continentId', (req, res) => {
     });
 });
 
-// Define a route for /continents without a specific continent name
-app.get('/continents', (req, res) => {
-    // Render a default page or redirect to a specific URL
-    res.render('notFound');
-});
-
 // Define a route for each continent based on the continent name
 app.get('/continents/:continentName', async (req, res) => {
     const continentName = req.params.continentName;
@@ -241,7 +235,7 @@ app.get('/continents/:continentName', async (req, res) => {
         connection.query(continentQuery, [continentName], async (error, results) => {
             if (error) {
                 console.error('Error fetching continent details:', error);
-                return res.status(500).json({error: 'An error occurred while fetching continent details'});
+                return res.status(500).json({ error: 'An error occurred while fetching continent details' });
             }
 
             if (results.length === 0) {
@@ -251,32 +245,33 @@ app.get('/continents/:continentName', async (req, res) => {
 
             // Fetch the monuments belonging to the continent based on the continent ID
             const continentId = results[0].ID;
-            const monumentsQuery = `SELECT m.*
+            const monumentsQuery = `SELECT m.*, cn.name AS continentName, cn.cover AS continentCover
                                     FROM monuments AS m
-                                             INNER JOIN countries AS c ON m.country_id = c.id
-                                             INNER JOIN continents AS cn ON c.continent_id = cn.id
+                                    INNER JOIN countries AS c ON m.country_id = c.id
+                                    INNER JOIN continents AS cn ON c.continent_id = cn.id
                                     WHERE cn.name = ?`;
 
             connection.query(monumentsQuery, [continentName], (error, monuments) => {
                 if (error) {
                     console.error('Error fetching monuments:', error);
-                    return res.status(500).json({error: 'An error occurred while fetching monuments'});
+                    return res.status(500).json({ error: 'An error occurred while fetching monuments' });
                 }
 
-                continentResult = monuments;
+                if (monuments.length === 0) {
+                    // No monuments found for the continent
+                    // Render the "continent.ejs" template with an empty array as continentResult
+                    return res.render('continent', { continentResult: [], contiqueResult, monuResult, allmonuResult, allResult });
+                }
 
-                // Render the "continent.ejs" template with the fetched monuments
-                res.render('continent', {
-                    continentResult, continentName, monuResult, contiqueResult, allmonuResult, allResult
-                });
+                // Pass the monuments to the "continent.ejs" template
+                res.render('continent', { continentResult: monuments, contiqueResult, monuResult, allmonuResult, allResult });
             });
         });
     } catch (error) {
         console.error('Error fetching continent details:', error);
-        res.status(500).json({error: 'An error occurred while fetching continent details'});
+        res.status(500).json({ error: 'An error occurred while fetching continent details' });
     }
 });
-
 
 // Define a route to handle invalid continent names
 app.get('/continents/*', (req, res) => {
@@ -372,7 +367,7 @@ app.get('/contact', (req, res) => {
 });
 
 app.get('/test', (req, res) => {
-    res.render('layout/NavBar', {monuResult, contiqueResult, allmonuResult, allResult, monuqueResult});
+    res.render('TestEJS', {monuResult, contiqueResult, allmonuResult, allResult, monuqueResult});
 });
 
 app.get('/monudb', (req, res) => {
