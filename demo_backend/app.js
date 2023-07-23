@@ -106,6 +106,37 @@ function saveComments(comments) {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
+// Route to handle the contact form submission and save data
+app.post('/submit', (req, res) => {
+    const formData = {
+        fullName: req.body['full-name'],
+        email: req.body.email,
+        phone: req.body.phone,
+        subject: req.body.subject,
+        message: req.body.msg,
+    };
+
+    // Load existing data from the JSON file if it exists
+    let existingData = [];
+
+    if (fs.existsSync('user_contact_req.json')) {
+        const jsonData = fs.readFileSync('user_contact_req.json', 'utf8');
+
+        if (jsonData) {
+            existingData = JSON.parse(jsonData);
+        }
+    }
+
+    existingData.push(formData);
+
+    // Save the updated data back to the JSON file
+    fs.writeFileSync('user_contact_req.json', JSON.stringify(existingData, null, 2));
+
+    // Redirect back to the Contact Us page after submission
+    res.redirect('/contact');
+});
+
+
 app.get('/monuments/:monumentName', async (req, res) => {
     const monumentName = req.params.monumentName;
     try {
