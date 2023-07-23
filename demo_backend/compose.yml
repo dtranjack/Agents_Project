@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  db:
+    image: mariadb
+    environment:
+      - "MYSQL_ROOT_PASSWORD=171198"
+      - "MYSQL_DATABASE=monument"
+    ports:
+      - 3306:3306
+    volumes:
+      - "./monument.sql:/docker-entrypoint-initdb.d/init.sql"
+  admin:
+    image: phpmyadmin
+    ports:
+      - 8080:80

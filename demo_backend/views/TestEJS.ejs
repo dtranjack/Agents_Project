@@ -1,0 +1,24 @@
+<div class="container mt-4">
+    <h1><%= continentName.name %> Monuments</h1>
+    <% if (continentResult.length === 0) { %>
+        <p>No monument found for this continent at the moment</p>
+    <% } else { %>
+        <div class="row">
+            <% continentResult.forEach((monument) => { %>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                        <a href="/monuments/<%= monument.name %>" target="_blank">
+                            <img src="<%= monument.mini_background %>" class="card-img-top" alt="Destination Image">
+                        </a>
+                        <div class="card-body">
+                            <a href="/monuments/<%= monument.name %>" target="_blank">
+                                <h5 class="card-title"><%= monument.name %></h5>
+                            </a>
+                            <p class="card-text"><%= monument.short_description %></p>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    <% } %>
+</div>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" type="image/x-icon" href="/IMG/spirals.png">
+</head>
+<style>
+    @import url('https://fonts.cdnfonts.com/css/gt-eesti-display-trial');
+
+    .card {
+        height: 100%;
+        overflow: hidden;
+    }
+
+    body {
+        font-family: 'GT Eesti Display Trial', sans-serif;
+    }
+
+    .card-img-top {
+        border: none;
+        object-fit: cover;
+        height: 250px;
+        transition: transform 0.3s ease;
+    }
+
+    .card:hover .card-img-top {
+        transform: scale(1.1);
+        overflow: hidden;
+        height: 250px;
+    }
+
+    .card-body {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card-title {
+        font-size: 1.25rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .card-text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        flex-grow: 1;
+    }
+
+    .af {
+        font-family: 'GT Eesti Display Trial', sans-serif;
+        background-image: url('IMG/Search.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center bottom;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 50px 0;
+        background-color: #f1f1f1; /* Fallback background color */
+        height: 70vh;
+        clear: both;
+    }
+
+    .text-overlay h1 {
+        font-size: 50px;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    .text-overlay p {
+        font-size: 30px;
+        margin-bottom: 0;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .text-overlay {
+        padding: 20px;
+        text-align: center;
+        color: white;
+        z-index: 1;
+    }
+
+    .no-result {
+        text-align: center;
+        padding-top: 40px;
+        margin-bottom: 0;
+        font-size: 50px;
+        font-weight: bold;
+    }
+
+    .trydif {
+        text-align: center;
+        padding: 0;
+        margin-bottom: 50px;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .restit h1 {
+        color: #007bff;
+    }
+
+    .restit p {
+        font-size: 20px;
+    }
+</style>
+<body>
+<div class="head-bar">
+    <%- include('./layout/NavBar') %>
+</div>
+
+<header class="text-center mb-5 af">
+    <div class="text-overlay">
+        <h1>Looking for an Adventure of Wonders?</h1>
+        <p>Let Us Guide You to the Best Destinations</p>
+    </div>
+</header>
+<div class="container d-flex flex-column">
+    <div class="restit">
+        <h1>Search Results</h1>
+        <p><strong><%= count %></strong> results found for keyword: "<strong><%= searchingTerm %></strong>".</p>
+    </div>
+    <div class="container d-flex flex-column align-items-center">
+        <div class="row">
+            <% if (monuments.length > 0) { %>
+                <% monuments.forEach((monument) => { %>
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card">
+                            <a href="/monuments/<%= monument.name %>" target="_blank">
+                                <img src="<%= monument.mini_background %>" class="card-img-top" alt="Destination Image">
+                            </a>
+                            <div class="card-body">
+                                <a href="/monuments/<%= monument.name %>" target="_blank">
+                                    <h5 class="card-title"><%= monument.name %></h5>
+                                </a>
+                                <p class="card-text"><%= monument.short_description %></p>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <div>
+                    <p class="no-result">No result found.</p>
+                    <p class="trydif">Nothing matched your search criteria. Please try again with different keywords</p>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <%- include('./layout/footer') %>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

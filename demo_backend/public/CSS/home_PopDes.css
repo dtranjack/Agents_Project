@@ -1,0 +1,88 @@
+@import url('https://fonts.cdnfonts.com/css/gt-eesti-display-trial');
+
+div.PopDes .card {
+    overflow: hidden;
+    position: relative;
+}
+
+div.PopDes .card-img-top {
+    height: 200px !important;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+div.PopDes .card:hover .card-img-top {
+    transform: scale(1.1);
+    transform-origin: top;
+}
+
+div.PopDes .card-body {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 10px;
+    transition: opacity 0.3s ease;
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+div.PopDes .card-title {
+    font-weight: bolder;
+    font-size: 2vw;
+    font-family: 'GT Eesti Display Trial', sans-serif;
+
+}
+
+div.PopDes .card:hover .card-body {
+    opacity: 1;
+}
+
+div.PopDes body {
+    font-family: 'GT Eesti Display Trial', sans-serif;
+}
+
+div.PopDes .carousel-control-prev,
+div.PopDes .carousel-control-next {
+    width: 40px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #fff;
+    z-index: 1;
+}
+
+div.PopDes .carousel-control-prev {
+    left: -50px;
+}
+
+div.PopDes .carousel-control-next {
+    right: -50px;
+}
+
+@media (max-width: 768px) {
+    div.PopDes .carousel-control-prev {
+        left: 0;
+    }
+
+    div.PopDes  .carousel-control-next {
+        right: 0;
+    }
+    div.PopDes .card-title {
+        font-size: 5vw;
+    }
+}

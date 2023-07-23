@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monument Web</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <link rel="stylesheet" href="../public/CSS/magnific-popup.css">
+    <script src="../public/JS/jquery.magnific-popup.js"></script>
+    <link rel="stylesheet" href="../public/CSS/gallery.css"> <!-- Custom CSS for gallery layout -->
+    <style>
+        html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 1200px;
+        }
+
+        .header-container {
+            display: flex;
+            flex-direction: column;
+            height: calc(100vh - 56px);
+            /* Subtract the height of the navbar */
+        }
+
+        .img-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .img-container img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+
+        .text-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 1;
+        }
+
+        .text-overlay h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .text-overlay p {
+            font-size: 18px;
+            margin-bottom: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Description section styles */
+        .description {
+            margin-top: 50px;
+        }
+
+        .description h2 {
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        /* Gallery section styles */
+        .gallery {
+            margin-top: 50px;
+        }
+
+        .comment-box {
+            margin-top: 50px;
+        }
+
+        .comment-box h2 {
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        /* Footer styles */
+        footer {
+            background-color: #f8f9fa;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        footer p {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+<div class="header-container">
+    <div class="img-container">
+        <img src="IMG/Arc_de_Triomphe/cover.jpg" alt="Arc de Triomphe">
+        <div class="text-overlay">
+            <h1>Welcome to Arc de Triomphe</h1>
+            <p>Discover Parisian grandeur at its finest</p>
+        </div>
+    </div>
+</div>
+
+<div class="container description">
+    <h2>Description</h2>
+</div>
+
+<div class="container comment-box">
+    <h2>Comments</h2>
+    <form>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Enter your name">
+        </div>
+        <div class="form-group">
+            <label for="comment">Comment</label>
+            <textarea class="form-control" id="comment" rows="4" placeholder="Enter your comment"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+
+
+<!--<div class="container gallery">-->
+<!--    <div class="row" id="image-gallery">-->
+<!--        &lt;!&ndash; Your gallery images will be added dynamically here &ndash;&gt;-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--&lt;!&ndash; The modal &ndash;&gt;-->
+<!--<div class="modal fade" id="image-modal" tabindex="-1" role="dialog">-->
+<!--    <div class="modal-dialog modal-dialog-centered">-->
+<!--        <div class="modal-content">-->
+<!--            <div class="modal-header">-->
+<!--                <button type="button" class="close" data-dismiss="modal">&times;</button>-->
+<!--            </div>-->
+<!--            <div class="modal-body text-center">-->
+<!--                <img src="" class="img-fluid" alt="Modal Image">-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<script>-->
+<!--    const galleryImages = [-->
+<!--        "../public/IMG/spirals.png",-->
+<!--        "../public/IMG/About_Us.jpg",-->
+<!--        "../public/IMG/Contact_Us.jpg",-->
+<!--        // Add more image URLs here-->
+<!--    ];-->
+
+<!--    document.addEventListener("DOMContentLoaded", function () {-->
+<!--        const galleryContainer = document.getElementById("image-gallery");-->
+
+<!--        galleryImages.forEach((imageURL) => {-->
+<!--            const galleryItem = document.createElement("div");-->
+<!--            galleryItem.classList.add("col-md-4", "col-sm-6", "mb-4");-->
+
+<!--            const imageLink = document.createElement("a");-->
+<!--            imageLink.setAttribute("href", imageURL);-->
+
+<!--            const image = document.createElement("img");-->
+<!--            image.classList.add("img-fluid", "rounded");-->
+<!--            image.setAttribute("src", imageURL);-->
+
+<!--            imageLink.appendChild(image);-->
+<!--            galleryItem.appendChild(imageLink);-->
+<!--            galleryContainer.appendChild(galleryItem);-->
+<!--        });-->
+
+<!--        // Initialize Magnific Popup-->
+<!--        $('#image-gallery').magnificPopup({-->
+<!--            delegate: 'a',-->
+<!--            type: 'image',-->
+<!--            gallery: {-->
+<!--                enabled: true-->
+<!--            },-->
+<!--            // Close on outside click-->
+<!--            closeOnContentClick: true,-->
+<!--            // Enable keyboard navigation-->
+<!--            enableKeyboardNavigation: true,-->
+<!--            // Enable smooth sliding transition-->
+<!--            mainClass: 'mfp-zoom-in',-->
+<!--            removalDelay: 300,-->
+<!--            // Customize other options as per your preference-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
+
+
+</body>
+
+</html>

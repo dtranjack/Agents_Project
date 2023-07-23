@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popular Destinations</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<style>
+    @import url('https://fonts.cdnfonts.com/css/gt-eesti-display-trial');
+
+    @import url('https://fonts.cdnfonts.com/css/gt-eesti-display-trial');
+
+    div.PopDes .card {
+        overflow: hidden;
+        position: relative;
+    }
+
+    div.PopDes .card-img-top {
+        height: 300px !important;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    div.PopDes .card:hover .card-img-top {
+        transform: scale(1.1);
+        transform-origin: top;
+    }
+
+    div.PopDes .card-body {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: #fff;
+        padding: 10px;
+        transition: opacity 0.3s ease;
+        opacity: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    div.PopDes .card-title {
+        font-weight: bolder;
+        font-size: 2vw;
+        font-family: 'GT Eesti Display Trial', sans-serif;
+
+    }
+
+    div.PopDes .card:hover .card-body {
+        opacity: 1;
+    }
+
+    div.PopDes body {
+        font-family: 'GT Eesti Display Trial', sans-serif;
+    }
+
+    div.PopDes .carousel-control-prev,
+    div.PopDes .carousel-control-next {
+        width: 40px;
+        height: 40px;
+        background-color: rgba(0, 0, 0, 0.5);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.3s ease;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #fff;
+        z-index: 1;
+    }
+
+    div.PopDes .carousel-control-prev {
+        left: -50px;
+    }
+
+    div.PopDes .carousel-control-next {
+        right: -50px;
+    }
+
+    @media (max-width: 768px) {
+        div.PopDes .carousel-control-prev {
+            left: 0;
+        }
+
+        div.PopDes  .carousel-control-next {
+            right: 0;
+        }
+        div.PopDes .card-title {
+            font-size: 5vw;
+        }
+    }
+
+</style>
+
+<body>
+
+<section id="popular-destinations" class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-5" style="font-weight: bolder">Popular Destinations</h2>
+        <div id="carouselExample" class="carousel slide" data-interval="false">
+            <div class="carousel-inner">
+                <% for (let i = 0; i < contiqueResult.length; i += 3) { %>
+                    <div class="carousel-item<%= i === 0 ? ' active' : '' %>">
+                        <div class="row">
+                            <% for (let j = i; j < i + 3 && j < contiqueResult.length; j++) { %>
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="card">
+                                        <img src="<%= contiqueResult[j].cover %>" class="card-img-top"
+                                             alt="<%= contiqueResult[j].name %>">
+                                        <a target="_blank" href="/continents/<%= contiqueResult[j].name %>">
+                                            <div class="card-body">
+                                                <h5 class="card-title"><%= contiqueResult[j].name %></h5>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            <% } %>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExample" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

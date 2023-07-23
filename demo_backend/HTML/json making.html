@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p id="jsonprint"></p>
+</body>
+
+<script>
+  const images = [
+      '/IMG/Great_pyramid_of_Giza/1.jpg',
+      '/IMG/Great_pyramid_of_Giza/2.jpg',
+      '/IMG/Great_pyramid_of_Giza/3.jpg',
+      '/IMG/Great_pyramid_of_Giza/4.jpg',
+      '/IMG/Great_pyramid_of_Giza/5.jpg',
+      '/IMG/Great_pyramid_of_Giza/6.jpg',
+      '/IMG/Great_pyramid_of_Giza/7.jpg',
+      '/IMG/Great_pyramid_of_Giza/8.jpg',
+      '/IMG/Great_pyramid_of_Giza/9.jpg',
+      '/IMG/Great_pyramid_of_Giza/10.jpg'
+  ];
+
+
+  const serializedImages = JSON.stringify(images);
+
+  document.getElementById('jsonprint').innerHTML = serializedImages;
+  console.log(serializedImages);
+</script>
+</html>

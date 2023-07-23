@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= monumentDetails.name %></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.0-beta3/css/bootstrap.min.css">
+    <!-- Lightbox2 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/CSS/magnific-popup.css">
+    <link rel="stylesheet" href="/CSS/NavBar.css">
+    <link rel="stylesheet" href="/CSS/Footer.css">
+    <link rel="icon" type="image/x-icon" href="/IMG/spirals.png">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.0-beta3/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+    <script src="/JS/jquery.magnific-popup.js"></script>
+    <style>
+        html {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 1200px;
+        }
+
+        .header-container {
+            display: flex;
+            flex-direction: column;
+            height: 70vh;
+        }
+
+        .img-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .img-container img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+
+        hr.solid {
+            border-top: 8px solid #000000;
+            border-radius: 5px;
+        }
+
+        .text-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 1;
+        }
+
+        .text-overlay h1 {
+            font-size: 40px;
+            margin-bottom: 20px;
+            text-shadow: 5px 5px 8px rgba(0, 0, 0, 0.5);
+            font-weight: bold;
+        }
+
+        .text-overlay p {
+            font-size: 18px;
+            margin-bottom: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Add a semi-transparent background to the text overlay to make it more highlighted */
+        .text-overlay {
+            background-color: rgba(0, 0, 0, 0.4);
+            padding: 20px;
+        }
+
+        .animated-overlay {
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        /* Add a slight animation to the text overlay for a subtle pop-up effect */
+        .text-overlay {
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .text-overlay.visible {
+            opacity: 1;
+        }
+
+
+        /* Description section styles */
+        .description {
+            margin-top: 50px;
+        }
+
+        .description h2 {
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        .desc {
+            padding: 16px;
+            border-style: hidden hidden hidden double;
+            border-color: crimson;
+            border-width: 5px;
+            border-radius: 12px;
+            background-color: #c7e2ff;
+            font-size: 20px;
+        }
+
+        .feedbacks {
+            padding: 16px;
+            border-style: hidden hidden hidden double;
+            border-color: crimson;
+            border-width: 5px;
+            border-radius: 12px;
+            background-color: #c7e2ff;
+            font-size: 20px;
+        }
+
+        .comment-box {
+            margin-top: 50px;
+        }
+
+        .comment {
+            margin-bottom: 50px;
+        }
+
+        .comments {
+            margin-bottom: 50px;
+            margin-top: 50px;
+        }
+
+        .comment-box h2 {
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        .comment h2 {
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        .comment-box form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .comment-box .form-group {
+            margin-bottom: 20px;
+        }
+
+        .comment-box label {
+            margin-bottom: 5px;
+        }
+
+        .comment-box input,
+        .comment-box textarea {
+            padding: 10px;
+        }
+
+        .comment-box button {
+            padding: 10px 20px;
+        }
+
+
+        /* Add your custom CSS for the gallery here */
+
+        .gallery {
+            margin-top: 50px;
+        }
+
+        /* Add your custom CSS for the gallery here */
+        .gallery-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: space-between; /* This will create space between images */
+            max-width: 960px; /* Limit the width of the gallery */
+            margin: 0 auto; /* Center the gallery on the page */
+        }
+
+        .gallery-item {
+            flex-basis: calc(33.33% - 10px); /* Distribute equally with gaps (3 images per row) */
+            max-width: calc(33.33% - 10px);
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 200px; /* Set a fixed height for the images */
+            object-fit: cover; /* Maintain aspect ratio and cover the container */
+            cursor: pointer;
+        }
+
+        /* Add hover animation */
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery h2 {
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        .vid h2 {
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        .vid {
+            margin-top: 50px;
+        }
+
+        /* Make vid section responsive */
+        /* Responsive video wrapper */
+        .video-wrapper {
+            position: relative;
+            padding-top: 56.25%; /* 16:9 aspect ratio (480 / 853 * 100) */
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        @media screen and (max-width: 768px) {
+            .vydia {
+                padding-left: 0;
+            }
+        }
+    </style>
+
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/home">
+            <img src="IMG/spirals.png" alt="Logo" class="logo">
+        </a>
+        <div class="navbar-search">
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-light" type="submit">Search</button>
+            </form>
+        </div>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/home">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="designationDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Destinations
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="designationDropdown" id="destinationsMenu">
+                        <ul>
+                            <li ng-repeat="continent in continents">
+                                <a class="dropdown-item continent" href="#" data-continent-id="{{ continent.id }}" ng-click="showSubmenu($event)">
+                                    {{ continent.name }}
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li ng-repeat="monument in continent.monuments">
+                                        <a class="dropdown-item" href="#">{{ monument.name }}</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact">Contact Us</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="header-container">
+    <div class="img-container">
+        <img src="<%= monumentDetails.cover %>" alt="<%= monumentDetails.name %>">
+        <div class="text-overlay animated-overlay">
+            <h1>Welcome to <%= monumentDetails.name %></h1>
+        </div>
+    </div>
+</div>
+
+<section class="description">
+    <div class="container description">
+        <h2>Description</h2>
+        <div class="desc">
+            <p><%= monumentDetails.description %></p>
+            <a href="/download/<%= monumentDetails.name %>/pdf">Download as PDF</a>
+        </div>
+    </div>
+</section>
+
+<section class="gallery">
+    <div class="container gallery">
+        <h2>Gallery</h2>
+        <div class="row gallery-container" id="image-gallery">
+            <% galleryImages.forEach((imagePath, index) => { %>
+                <div class="col-md-4 col-sm-6 mb-4 gallery-item">
+                    <a href="<%= imagePath %>" data-lightbox="gallery" data-title="Image <%= index + 1 %>">
+                        <img src="<%= imagePath %>" class="img-fluid rounded" alt="Image <%= index + 1 %>">
+                    </a>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+</section>
+
+<section class="vid">
+    <div class="container">
+        <h2>Inside the experience</h2>
+        <div class="vydia">
+            <div class="video-wrapper">
+                <iframe width="853" height="480" src="<%= monumentDetails.video %>"
+                        title="<%= monumentDetails.name %>" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="comment">
+    <!-- Comment Box -->
+    <div class="container comment-box">
+        <h2>Leave a Comment</h2>
+        <!-- monument.ejs -->
+        <form action="/submit" method="POST">
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name" required>
+            <br>
+            <label for="comment">Comment:</label>
+            <textarea name="comment" id="comment" rows="4" required></textarea>
+            <!-- Add a hidden input to store the monumentName -->
+            <input type="hidden" name="monumentName" value="<%= monumentDetails.name %>">
+            <br>
+            <input type="submit" value="Submit" class="btn btn-primary">
+        </form>
+
+    </div>
+
+    <!-- Comments Section -->
+    <div class="container comments">
+        <h2>What people are saying about <%= monumentDetails.name %></h2>
+        <div class="feedbacks">
+        <% if (comments.length === 0) { %>
+            <p>No comments yet.</p>
+        <% } else { %>
+            <ul>
+                <% comments.forEach((comment) => { %>
+                    <li>
+                        <p>
+                            <strong><%= comment.name %>:</strong> <%= comment.comment %>
+                        </p>
+                        <hr class="solid">
+                    </li>
+                <% }); %>
+            </ul>
+        <% } %>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h5>About Us</h5>
+                <p>Discover history's wonders with Spirals. Unforgettable journeys through time.</p>
+                <p>Click <a style="color: crimson" href="/about">here</a> to find out more about us.</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <h5>Destinations</h5>
+                <p>Click <a style="color: #007bff;" href="/all">here</a> to find out more about popular destinations</p>
+            </div>
+            <div class="col-md-4">
+                <h5>Contact Us</h5>
+                <p>Số 8A Tôn Thất Thuyết, Mỹ Đình, Nam Từ Liêm <br>
+                    Hà Nội, Việt Nam <br>
+                    <i class="fa fa-envelope"></i> <a href="mailto:nhattruong5114@gmail.com">nhattruong5114@gmail.com</a> <br>
+                    <i class="fa fa-phone-square"></i> <a href="tel:0123456789">02432321284</a>
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <p>&copy; 2023 Spirals. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const headerContainer = document.querySelector('.header-container');
+        const textOverlay = document.querySelector('.text-overlay');
+
+        function isElementInViewport(element) {
+            const rect = element.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+
+        function animateTextOverlay() {
+            if (isElementInViewport(headerContainer)) {
+                textOverlay.classList.add('visible');
+            } else {
+                textOverlay.classList.remove('visible');
+            }
+        }
+
+        // Call the function once to handle initial state
+        animateTextOverlay();
+
+        // Add scroll event listener to trigger the animation
+        document.addEventListener('scroll', animateTextOverlay);
+    });
+</script>
+
+
+</body>
+</html>
