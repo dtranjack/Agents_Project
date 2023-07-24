@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monument Web</title>
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta3/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+/* Reset default styles and set some common styles */
+body, html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Set the maximum width for the content container and center it horizontally */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Create a header container with a background image and text overlay */
+.header-container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 56px); /* The header takes up the full viewport height minus 56 pixels */
+}
+
+/* The image container within the header */
+.img-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Image styling */
+.img-container img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+/* Text overlay on the header image */
+.text-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  z-index: 1;
+}
+
+.text-overlay h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.text-overlay p {
+  font-size: 18px;
+  margin-bottom: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Description section */
+.description {
+  margin-top: 50px;
+}
+
+.description h2 {
+  margin-bottom: 20px;
+  color: #007bff;
+}
+
+/* Gallery section */
+.gallery {
+  margin-top: 50px;
+}
+
+.carousel-inner img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  width: 50px;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: #007bff;
+}
+
+.carousel-control-prev-icon:before,
+.carousel-control-next-icon:before {
+  color: white;
+}
+
+/* Comment box section */
+.comment-box {
+  margin-top: 50px;
+}
+
+.comment-box h2 {
+  margin-bottom: 20px;
+  color: #007bff;
+}
+
+/* Lightbox styles for displaying images in a modal */
+.lightbox {
+  display: flex;
+  position: fixed;
+  z-index: 9999;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox img {
+  max-height: 80vh;
+  max-width: 100%;
+  margin: auto;
+  display: block;
+}
+
+.lightbox.show {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: white;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+.lightbox-carousel {
+  position: relative;
+}
+
+.lightbox-carousel-inner {
+  display: flex;
+  justify-content: center;
+}
+
+.lightbox-carousel-item {
+  flex: 0 0 100%;
+  display: none;
+}
+
+.lightbox-carousel-item.active {
+  display: block;
+}
+
+.lightbox-carousel-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 40px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.lightbox-carousel-control:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.lightbox-carousel-control-prev {
+  left: 0;
+}
+
+.lightbox-carousel-control-next {
+  right: 0;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="header-container">
+    <div class="img-container">
+      <img src="IMG/Arc_de_Triomphe/cover.jpg" alt="Arc de Triomphe">
+      <div class="text-overlay">
+        <h1>Welcome to Arc de Triomphe</h1>
+        <p>Discover Parisian grandeur at its finest</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container description">
+    <h2>Description</h2>
+  </div>
+
+  <div class="container gallery">
+    <h2>Gallery</h2>
+    <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="IMG/Arc_de_Triomphe/1.jpg" alt="Image 1">
+        </div>
+        <div class="carousel-item">
+          <img src="IMG/Arc_de_Triomphe/2.jpg" alt="Image 2">
+        </div>
+        <div class="carousel-item">
+          <img src="IMG/Arc_de_Triomphe/3.jpg" alt="Image 3">
+        </div>
+        <!-- Add more images here -->
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="container comment-box">
+    <h2>Comments</h2>
+    <form>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter your name">
+      </div>
+      <div class="form-group">
+        <label for="comment">Comment</label>
+        <textarea class="form-control" id="comment" rows="4" placeholder="Enter your comment"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+
+  <div class="lightbox">
+    <div class="lightbox-close">&times;</div>
+    <div class="lightbox-carousel">
+      <div class="lightbox-carousel-inner">
+        <div class="lightbox-carousel-item active">
+          <img src="IMG/Arc_de_Triomphe/1.jpg" alt="Image 1">
+        </div>
+        <div class="lightbox-carousel-item">
+          <img src="IMG/Arc_de_Triomphe/2.jpg" alt="Image 2">
+        </div>
+        <div class="lightbox-carousel-item">
+          <img src="IMG/Arc_de_Triomphe/3.jpg" alt="Image 3">
+        </div>
+        <!-- Add more images here -->
+        
+      </div>
+      <button class="carousel-control-prev lightbox-carousel-control" type="button">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next lightbox-carousel-control" type="button">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+
+
+</body>
+<script>
+  const images = document.querySelectorAll('.carousel-inner img');
+  const lightbox = document.querySelector('.lightbox');
+  const lightboxItems = document.querySelectorAll('.lightbox-carousel-item');
+  const lightboxCarouselControls = document.querySelectorAll('.lightbox-carousel-control');
+  let currentLightboxImageIndex = 0;
+
+  images.forEach((image, index) => {
+    image.addEventListener('click', () => {
+      showLightbox(index);
+    });
+  });
+
+  lightbox.addEventListener('click', e => {
+    if (e.target === lightbox || e.target.classList.contains('lightbox-close')) {
+      hideLightbox();
+    }
+  });
+
+  document.addEventListener('keydown', e => {
+    if (lightbox.classList.contains('show')) {
+      if (e.key === 'ArrowLeft') {
+        currentLightboxImageIndex =
+          (currentLightboxImageIndex - 1 + lightboxItems.length) % lightboxItems.length;
+        updateLightboxCarousel();
+      } else if (e.key === 'ArrowRight') {
+        currentLightboxImageIndex = (currentLightboxImageIndex + 1) % lightboxItems.length;
+        updateLightboxCarousel();
+      } else if (e.key === 'Escape') {
+        hideLightbox();
+      }
+    }
+  });
+
+  lightboxCarouselControls.forEach(control => {
+    control.addEventListener('click', e => {
+      e.stopPropagation(); // Prevent click event from propagating to the lightbox
+      if (e.target.classList.contains('carousel-control-prev')) {
+        currentLightboxImageIndex = (currentLightboxImageIndex - 1 + lightboxItems.length) % lightboxItems.length;
+      } else if (e.target.classList.contains('carousel-control-next')) {
+        currentLightboxImageIndex = (currentLightboxImageIndex + 1) % lightboxItems.length;
+      }
+      updateLightboxCarousel();
+    });
+  });
+
+  function showLightbox(index) {
+    lightbox.classList.add('show');
+    currentLightboxImageIndex = index;
+    updateLightboxCarousel();
+    document.addEventListener('keydown', handleLightboxKeydown);
+    document.addEventListener('click', handleOutsideClick);
+  }
+
+  function hideLightbox() {
+    lightbox.classList.remove('show');
+    document.removeEventListener('keydown', handleLightboxKeydown);
+    document.removeEventListener('click', handleOutsideClick);
+  }
+
+  function handleLightboxKeydown(e) {
+    if (e.key === 'ArrowLeft') {
+      currentLightboxImageIndex = (currentLightboxImageIndex - 1 + lightboxItems.length) % lightboxItems.length;
+    } else if (e.key === 'ArrowRight') {
+      currentLightboxImageIndex = (currentLightboxImageIndex + 1) % lightboxItems.length;
+    } else if (e.key === 'Escape') {
+      hideLightbox();
+    }
+    updateLightboxCarousel();
+  }
+
+  function handleOutsideClick(e) {
+    if (!lightbox.contains(e.target)) {
+      hideLightbox();
+    }
+  }
+
+  function updateLightboxCarousel() {
+    lightboxItems.forEach((item, index) => {
+      if (index === currentLightboxImageIndex) {
+        item.classList.add('active');
+      } else {
+        item.classList.remove('active');
+      }
+    });
+  }
+</script>
+</html>
