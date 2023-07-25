@@ -107,7 +107,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 // Route to handle the contact form submission and save data
-app.post('/submit', (req, res) => {
+app.post('/submitContact', (req, res) => {
     const formData = {
         fullName: req.body['full-name'],
         email: req.body.email,
