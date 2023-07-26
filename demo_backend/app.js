@@ -17,6 +17,7 @@ var allResult;
 var monuqueResult;
 var searchingTerm;
 
+
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -31,6 +32,10 @@ connection.connect((err) => {
     }
     console.log('Connected to the database!');
 });
+
+// Middleware to parse incoming form data
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 const gimmeContiInfos = 'SELECT * FROM continents';
 connection.query(gimmeContiInfos, (error, results) => {
@@ -101,10 +106,6 @@ function saveComments(comments) {
     const commentsPath = path.join(__dirname, 'comments.json');
     fs.writeFileSync(commentsPath, JSON.stringify(comments, null, 2), 'utf8');
 }
-
-// Middleware to parse incoming form data
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
 
 // Route to handle the contact form submission and save data
 app.post('/submitContact', (req, res) => {
@@ -459,7 +460,6 @@ app.get('/search', (req, res) => {
         }
     });
 });
-
 
 // Serve static files
 app.use(express.static(__dirname + '/public'));

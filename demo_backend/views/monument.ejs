@@ -29,7 +29,7 @@
         .header-container {
             display: flex;
             flex-direction: column;
-            height: 70vh;
+            height: 600px;
         }
 
         .img-container {
@@ -115,6 +115,7 @@
             border-radius: 12px;
             background-color: #c7e2ff;
             font-size: 20px;
+            white-space: pre-line;
         }
 
         .feedbacks {
@@ -126,6 +127,18 @@
             background-color: #c7e2ff;
             font-size: 20px;
         }
+
+        .contact-us-inner {
+            padding: 16px;
+            border-style: hidden hidden hidden double;
+            border-color: crimson;
+            border-width: 5px;
+            border-radius: 12px;
+            background-color: #c7e2ff;
+            font-size: 20px;
+            margin-bottom: 50px;
+        }
+
 
         .comment-box {
             margin-top: 50px;
@@ -214,6 +227,11 @@
             color: #007bff;
         }
 
+        .contact-us h2 {
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
         .vid h2 {
             margin-bottom: 20px;
             color: #007bff;
@@ -243,11 +261,20 @@
                 padding-left: 0;
             }
         }
+
+        .navbarstick {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
     </style>
 
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark">
+<nav class="navbar navbar-expand-lg navbar-dark navbarstick">
     <div class="container">
         <a class="navbar-brand" href="/home">
             <img src="IMG/spirals.png" alt="Logo" class="logo">
@@ -305,8 +332,7 @@
 <section class="description">
     <div class="container description">
         <h2>Description</h2>
-        <div class="desc">
-            <p><%= monumentDetails.description %></p>
+        <div class="desc"><%= monumentDetails.description %><br>
             <a href="/download/<%= monumentDetails.name %>/pdf">Download as PDF</a>
         </div>
     </div>
@@ -318,7 +344,7 @@
         <div class="row gallery-container" id="gallery-container">
             <% galleryImages.slice(0, 3).forEach((imagePath, index) => { %>
                 <div class="col-md-4 col-sm-6 mb-4 gallery-item">
-                    <a href="<%= imagePath %>" data-lightbox="gallery" data-title="Image <%= index + 1 %>">
+                    <a href="<%= imagePath %>" data-lightbox="gallery1" data-title="Image <%= index + 1 %>">
                         <img src="<%= imagePath %>" class="img-fluid rounded" alt="Image <%= index + 1 %>">
                     </a>
                 </div>
@@ -339,32 +365,23 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="row" id="modal-gallery-container">
-                    <div class="row gallery-container" id="image-gallery">
-                        <% galleryImages.forEach((imagePath, index) => { %>
-                            <div class="col-md-4 col-sm-6 mb-4 gallery-item">
-                                <a href="<%= imagePath %>" data-lightbox="gallery" data-title="Image <%= index + 1 %>">
-                                    <img src="<%= imagePath %>" class="img-fluid rounded" alt="Image <%= index + 1 %>">
-                                </a>
-                            </div>
-                        <% }); %>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <!-- Add pagination controls inside the modal's footer -->
-                <nav aria-label="Gallery pagination">
-                    <ul class="pagination">
-                        <% for (let i = 1; i <= Math.ceil(galleryImages.length / 9); i++) { %>
-                            <li class="page-item <%= i === 1 ? 'active' : '' %>">
-                                <a class="page-link" href="#" onclick="changePage(<%= i %>); return false;"><%= i %></a>
-                            </li>
-                        <% } %>
-                    </ul>
-                </nav>
+                <!--images inside the modal here from galleryPage.ejs-->
             </div>
         </div>
+        <div class="modal-footer">
+            <!-- Add pagination controls inside the modal's footer -->
+            <nav aria-label="Gallery pagination">
+                <ul class="pagination">
+                    <% for (let i = 1; i <= Math.ceil(galleryImages.length / 9); i++) { %>
+                        <li class="page-item <%= i === 1 ? 'active' : '' %>">
+                            <a class="page-link" href="#" onclick="changePage(<%= i %>); return false;"><%= i %></a>
+                        </li>
+                    <% } %>
+                </ul>
+            </nav>
+        </div>
     </div>
+</div>
 </div>
 
 <section class="vid">
@@ -418,6 +435,20 @@
                     <% }); %>
                 </ul>
             <% } %>
+        </div>
+    </div>
+</section>
+
+<section class="contact-us">
+    <div class="container">
+        <h2>Need help?</h2>
+        <div class="contact-us-inner">
+            <p>Reach out to us using the button below for any additional information inquire about anything related to
+                the
+                site.</p>
+            <a href="/contact" target="_blank">
+                <button class="btn btn-primary">Contact Us</button>
+            </a>
         </div>
     </div>
 </section>

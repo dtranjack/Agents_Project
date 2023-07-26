@@ -24,7 +24,7 @@ body {
     text-align: center;
     padding: 50px 0;
     background-color: #f1f1f1; /* Fallback background color */
-    height: 70vh;
+    height: 600px;
     clear: both;
 }
 
@@ -49,6 +49,7 @@ body {
     margin: 1vh auto;
     font-size: 20px;
     box-shadow: 5px 5px lightgrey;
+    border-radius: 12px;
 }
 
 .content p {
@@ -117,6 +118,7 @@ a {
     box-shadow: 5px 5px lightgrey;
     margin: 5px 0 20px;
     clear: both;
+    border-radius: 12px;
 }
 
 #share-text {
