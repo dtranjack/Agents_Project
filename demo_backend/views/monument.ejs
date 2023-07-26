@@ -264,13 +264,15 @@
                     <a class="nav-link active" href="/home">Home</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="designationDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="designationDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Destinations
                     </a>
                     <div class="dropdown-menu" aria-labelledby="designationDropdown" id="destinationsMenu">
                         <ul>
                             <li ng-repeat="continent in continents">
-                                <a class="dropdown-item continent" href="#" data-continent-id="{{ continent.id }}" ng-click="showSubmenu($event)">
+                                <a class="dropdown-item continent" href="#" data-continent-id="{{ continent.id }}"
+                                   ng-click="showSubmenu($event)">
                                     {{ continent.name }}
                                 </a>
                                 <ul class="dropdown-menu">
@@ -314,8 +316,8 @@
 <section class="gallery">
     <div class="container gallery">
         <h2>Gallery</h2>
-        <div class="row gallery-container" id="image-gallery">
-            <% galleryImages.forEach((imagePath, index) => { %>
+        <div class="row gallery-container" id="gallery-container">
+            <% galleryImages.slice(0, 3).forEach((imagePath, index) => { %>
                 <div class="col-md-4 col-sm-6 mb-4 gallery-item">
                     <a href="<%= imagePath %>" data-lightbox="gallery" data-title="Image <%= index + 1 %>">
                         <img src="<%= imagePath %>" class="img-fluid rounded" alt="Image <%= index + 1 %>">
@@ -323,8 +325,36 @@
                 </div>
             <% }); %>
         </div>
+        <div class="text-center">
+            <button id="view-all-btn" class="btn btn-primary">View All Photos</button>
+        </div>
     </div>
 </section>
+
+<!-- Modal -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="imageModalLabel">All Photos</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row" id="modal-gallery-container">
+                    <div class="row gallery-container" id="image-gallery">
+                        <% galleryImages.forEach((imagePath, index) => { %>
+                            <div class="col-md-4 col-sm-6 mb-4 gallery-item">
+                                <a href="<%= imagePath %>" data-lightbox="gallery" data-title="Image <%= index + 1 %>">
+                                    <img src="<%= imagePath %>" class="img-fluid rounded" alt="Image <%= index + 1 %>">
+                                </a>
+                            </div>
+                        <% }); %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <section class="vid">
     <div class="container">
@@ -363,20 +393,20 @@
     <div class="container comments">
         <h2>What people are saying about <%= monumentDetails.name %></h2>
         <div class="feedbacks">
-        <% if (comments.length === 0) { %>
-            <p>No comments yet.</p>
-        <% } else { %>
-            <ul>
-                <% comments.forEach((comment) => { %>
-                    <li>
-                        <p>
-                            <strong><%= comment.name %>:</strong> <%= comment.comment %>
-                        </p>
-                        <hr class="solid">
-                    </li>
-                <% }); %>
-            </ul>
-        <% } %>
+            <% if (comments.length === 0) { %>
+                <p>No comments yet.</p>
+            <% } else { %>
+                <ul>
+                    <% comments.forEach((comment) => { %>
+                        <li>
+                            <p>
+                                <strong><%= comment.name %>:</strong> <%= comment.comment %>
+                            </p>
+                            <hr class="solid">
+                        </li>
+                    <% }); %>
+                </ul>
+            <% } %>
         </div>
     </div>
 </section>
@@ -397,7 +427,8 @@
                 <h5>Contact Us</h5>
                 <p>Số 8A Tôn Thất Thuyết, Mỹ Đình, Nam Từ Liêm <br>
                     Hà Nội, Việt Nam <br>
-                    <i class="fa fa-envelope"></i> <a href="mailto:nhattruong5114@gmail.com">nhattruong5114@gmail.com</a> <br>
+                    <i class="fa fa-envelope"></i> <a
+                            href="mailto:nhattruong5114@gmail.com">nhattruong5114@gmail.com</a> <br>
                     <i class="fa fa-phone-square"></i> <a href="tel:0123456789">02432321284</a>
                 </p>
             </div>
@@ -438,6 +469,17 @@
 
         // Add scroll event listener to trigger the animation
         document.addEventListener('scroll', animateTextOverlay);
+    });
+
+    // JavaScript to handle the "View All Photos" button and modal opening
+    document.addEventListener('DOMContentLoaded', function () {
+        const viewAllBtn = document.getElementById('view-all-btn');
+        const imageModal = new bootstrap.Modal(document.getElementById('imageModal'));
+
+        // Click on "View All Photos" button
+        viewAllBtn.addEventListener('click', function () {
+            imageModal.show();
+        });
     });
 </script>
 
