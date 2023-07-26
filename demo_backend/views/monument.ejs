@@ -270,13 +270,12 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="designationDropdown" id="destinationsMenu">
                         <ul>
-                            <li ng-repeat="continent in continents">
-                                <a class="dropdown-item continent" href="#" data-continent-id="{{ continent.id }}"
-                                   ng-click="showSubmenu($event)">
+                            <li>
+                                <a class="dropdown-item continent" href="#" data-continent-id="{{ continent.id }}">
                                     {{ continent.name }}
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li ng-repeat="monument in continent.monuments">
+                                    <li>
                                         <a class="dropdown-item" href="#">{{ monument.name }}</a>
                                     </li>
                                 </ul>
@@ -326,7 +325,7 @@
             <% }); %>
         </div>
         <div class="text-center">
-            <button id="view-all-btn" class="btn btn-primary">View All Photos</button>
+            <button type="button" class="btn btn-primary" onclick="openModal()">View All Photos</button>
         </div>
     </div>
 </section>
@@ -352,6 +351,18 @@
                     </div>
                 </div>
             </div>
+            <div class="modal-footer">
+                <!-- Add pagination controls inside the modal's footer -->
+                <nav aria-label="Gallery pagination">
+                    <ul class="pagination">
+                        <% for (let i = 1; i <= Math.ceil(galleryImages.length / 9); i++) { %>
+                            <li class="page-item <%= i === 1 ? 'active' : '' %>">
+                                <a class="page-link" href="#" onclick="changePage(<%= i %>); return false;"><%= i %></a>
+                            </li>
+                        <% } %>
+                    </ul>
+                </nav>
+            </div>
         </div>
     </div>
 </div>
@@ -362,7 +373,7 @@
         <div class="vydia">
             <div class="video-wrapper">
                 <iframe width="853" height="480" src="<%= monumentDetails.video %>"
-                        title="<%= monumentDetails.name %>" frameborder="0"
+                        title="<%= monumentDetails.name %>"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         allowfullscreen></iframe>
             </div>
@@ -471,16 +482,35 @@
         document.addEventListener('scroll', animateTextOverlay);
     });
 
-    // JavaScript to handle the "View All Photos" button and modal opening
-    document.addEventListener('DOMContentLoaded', function () {
-        const viewAllBtn = document.getElementById('view-all-btn');
-        const imageModal = new bootstrap.Modal(document.getElementById('imageModal'));
+    function openModal() {
+        // Call the changePage function with page number 1 to load the first page of images
+        changePage(1);
 
-        // Click on "View All Photos" button
-        viewAllBtn.addEventListener('click', function () {
-            imageModal.show();
-        });
-    });
+        // Open the image modal
+        $('#imageModal').modal('show');
+    }
+
+    function changePage(pageNumber) {
+        const monumentName = '<%= monumentDetails.name %>';
+        fetch(`/gallery/${monumentName}/page/${pageNumber}`)
+            .then(response => response.text())
+            .then(html => {
+                const modalBody = document.querySelector('.modal-body');
+                modalBody.innerHTML = html;
+
+                // Update pagination links active state
+                const paginationLinks = document.querySelectorAll('.pagination .page-item');
+                paginationLinks.forEach(link => {
+                    if (link.textContent.trim() === pageNumber.toString()) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+            })
+            .catch(error => console.error(error));
+    }
+
 </script>
 
 

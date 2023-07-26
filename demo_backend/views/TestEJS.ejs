@@ -1,30 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>5-Star Rating System</title>
-    <!-- Include any necessary stylesheets -->
-</head>
-<body>
-<div class="rating-container">
-    <span class="rating-star">&#9733;</span>
-    <span class="rating-star">&#9733;</span>
-    <span class="rating-star">&#9733;</span>
-    <span class="rating-star">&#9733;</span>
-    <span class="rating-star">&#9733;</span>
+<div class="row gallery-container" id="image-gallery">
+    <% galleryImages.forEach((imagePath, index) => { %>
+        <div class="col-md-4 col-sm-6 mb-4 gallery-item">
+            <a href="<%= imagePath %>" data-lightbox="gallery" data-title="Image <%= index + 1 %>">
+                <img src="<%= imagePath %>" class="img-fluid rounded" alt="Image <%= index + 1 %>">
+            </a>
+        </div>
+    <% }); %>
 </div>
-
-<div class="comments-container">
-    <h2>Comments</h2>
-    <form id="comment-form">
-        <input type="text" id="name" placeholder="Your Name" required>
-        <textarea id="comment" placeholder="Your Comment" required></textarea>
-        <button type="submit">Submit Comment</button>
-    </form>
-    <div id="comments">
-        <!-- Comments will be displayed here -->
-    </div>
-</div>
-
-<script src="/scripts.js"></script> <!-- Link to the client-side JavaScript -->
-</body>
-</html>

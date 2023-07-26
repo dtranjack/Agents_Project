@@ -169,6 +169,38 @@ app.get('/monuments/:monumentName', async (req, res) => {
     }
 });
 
+// Define a route to handle gallery pagination
+app.get('/gallery/:monumentName/page/:pageNumber', async (req, res) => {
+    const monumentName = req.params.monumentName;
+    const pageNumber = parseInt(req.params.pageNumber);
+
+    try {
+        // Fetch the gallery images for the monument
+        const galleryImages = await fetchGalleryImagesByMonumentName(monumentName);
+
+        // Calculate the start and end index for the images on the selected page
+        const startIndex = (pageNumber - 1) * 9;
+        const endIndex = pageNumber * 9;
+        const imagesToShow = galleryImages.slice(startIndex, endIndex);
+
+        // Render the image gallery with the images on the selected page
+        res.render('galleryPage', {
+            monumentName,
+            images: imagesToShow,
+            galleryImages,
+            monuResult,
+            contiqueResult,
+            allmonuResult,
+            allResult,
+            monuqueResult,
+            pageNumber
+        });
+    } catch (error) {
+        console.error('Error fetching monument details:', error);
+        res.status(500).json({ error: 'An error occurred while fetching monument details' });
+    }
+});
+
 // Route to handle comment submission
 app.post('/submit', (req, res) => {
     // Destructure 'name', 'comment', and 'monumentName' from req.body
