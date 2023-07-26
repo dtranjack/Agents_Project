@@ -1,0 +1,101 @@
+ .carousel-item img {
+      object-fit: cover;
+      height: 70vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .carousel-caption {
+      text-align: left;
+      position: absolute;
+      left: 0;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 18vh 15px 15px 5vw;
+      font-size: 2vw;
+      font-weight: bold;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      background: linear-gradient(to right, rgba(0, 0, 0, 0.3), transparent);
+      height: 100%;
+    }
+
+    .header-caption {
+      font-size: 4.5vw;
+      font-weight: bold;
+    }
+
+    @media (max-width: 992px) {
+      .carousel-item img {
+        height: 50vh;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .carousel-item img {
+        height: 40vh;
+      }
+
+      .carousel-caption {
+        width: 80%;
+      }
+
+      .header-caption {
+        font-size: 6vw;
+      }
+    }
+
+    .carousel-indicators {
+      display: none
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+      display: none
+    }
+    .carousel-item img {
+      transition: transform 0.3s ease;
+    }
+
+    .carousel-item img:hover {
+      transform: scale(1.05);
+    }
+    .carousel-caption {
+      display: none;
+      animation: fadeIn 1s;
+    }
+
+    .carousel-item.active .carousel-caption {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    .carousel-control-prev,
+    .carousel-control-next {
+      width: 10%;
+      opacity: 0.8;
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 50%;
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+      font-size: 24px;
+      color: white;
+    }
+
+    .carousel-control-prev:hover,
+    .carousel-control-next:hover {
+      opacity: 1;
+    }
