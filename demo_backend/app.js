@@ -184,7 +184,7 @@ app.get('/gallery/:monumentName/page/:pageNumber', async (req, res) => {
         const endIndex = pageNumber * 9;
         const imagesToShow = galleryImages.slice(startIndex, endIndex);
 
-        // Render the image gallery with the images on the selected page
+        // Render the image gallery with the images on the selected page and pass the pageNumber
         res.render('galleryPage', {
             monumentName,
             images: imagesToShow,
@@ -194,7 +194,7 @@ app.get('/gallery/:monumentName/page/:pageNumber', async (req, res) => {
             allmonuResult,
             allResult,
             monuqueResult,
-            pageNumber
+            pageNumber // Add pageNumber to the template
         });
     } catch (error) {
         console.error('Error fetching monument details:', error);

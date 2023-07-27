@@ -1,11 +1,9 @@
 <div class="row gallery-container" id="image-gallery">
-    <% const startIndex = (pageNumber - 1) * 9; %>
-    <% const endIndex = Math.min(startIndex + 9, galleryImages.length); %>
-    <% for (let i = startIndex; i < endIndex; i++) { %>
-        <div class="col-md-4 col-sm-6 mb-4 gallery-item">
-            <a href="<%= galleryImages[i] %>" data-lightbox="gallery" data-title="Image <%= i + 1 %>">
-                <img src="<%= galleryImages[i] %>" class="img-fluid rounded" alt="Image <%= i + 1 %>">
+    <% galleryImages.forEach((imagePath, index) => { %>
+        <div class="col-md-4 col-sm-6 mb-4 gallery-item <%= (index >= (pageNumber - 1) * 9 && index < pageNumber * 9) ? '' : 'd-none' %>">
+            <a href="<%= imagePath %>" data-lightbox="gallery" data-title="Image <%= index + 1 %>">
+                <img src="<%= imagePath %>" class="img-fluid rounded" alt="Image <%= index + 1 %>">
             </a>
         </div>
-    <% } %>
+    <% }); %>
 </div>
