@@ -167,24 +167,7 @@
 </section>
 
 <section class="comment">
-    <!-- Comment Box -->
-    <div class="container comment-box">
-        <h2>Leave a Comment</h2>
-        <!-- monument.ejs -->
-        <form action="/submit" method="POST">
-            <label for="name">Name:</label>
-            <input type="text" name="name" id="name" required>
-            <br>
-            <label for="comment">Comment:</label>
-            <textarea name="comment" id="comment" rows="4" required></textarea>
-            <!-- Add a hidden input to store the monumentName -->
-            <input type="hidden" name="monumentName" value="<%= monumentDetails.name %>">
-            <br>
-            <input type="submit" value="Submit" class="btn btn-primary">
-        </form>
-
-    </div>
-
+    <!-- Comments Section -->
     <!-- Comments Section -->
     <div class="container comments">
         <h2>What people are saying about <%= monumentDetails.name %></h2>
@@ -198,11 +181,39 @@
                             <p>
                                 <strong><%= comment.name %>:</strong> <%= comment.comment %>
                             </p>
-                            <hr class="solid">
+                            <hr class="normal">
                         </li>
                     <% }); %>
                 </ul>
             <% } %>
+        </div>
+        <!-- Updated button to trigger the comment modal -->
+        <button id="leaveCommentBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#commentModal">Leave a Comment</button>
+    </div>
+
+    <!-- Comment Modal -->
+    <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content container comment-box">
+                <div class="modal-header">
+                    <h5 class="modal-title">Leave a Comment</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- monument.ejs -->
+                    <form action="/submit" method="POST">
+                        <label for="name">Name:</label>
+                        <input type="text" name="name" id="name" required>
+                        <br>
+                        <label for="comment">Comment:</label>
+                        <textarea name="comment" id="comment" rows="4" required></textarea>
+                        <!-- Add a hidden input to store the monumentName -->
+                        <input type="hidden" name="monumentName" value="<%= monumentDetails.name %>">
+                        <br>
+                        <input type="submit" value="Submit" class="btn btn-primary">
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -212,8 +223,7 @@
         <h2>Need help?</h2>
         <div class="contact-us-inner">
             <p>Reach out to us using the button below for any additional information inquire about anything related to
-                the
-                site.</p>
+                the site.</p>
             <a href="/contact" target="_blank">
                 <button class="btn btn-primary">Contact Us</button>
             </a>
@@ -237,9 +247,8 @@
                 <h5>Contact Us</h5>
                 <p>Số 8A Tôn Thất Thuyết, Mỹ Đình, Nam Từ Liêm <br>
                     Hà Nội, Việt Nam <br>
-                    <i class="fa fa-envelope"></i> <a
-                            href="mailto:nhattruong5114@gmail.com">nhattruong5114@gmail.com</a> <br>
-                    <i class="fa fa-phone-square"></i> <a href="tel:0123456789">02432321284</a>
+                    <i class="fa fa-phone-square"></i> <a href="tel:0123456789">0123456789</a><br>
+                    <i class="fa fa-envelope"></i> <a href="mailto:dtranjack@gmail.com">dtranjack@gmail.com</a>
                 </p>
             </div>
         </div>
@@ -310,6 +319,21 @@
             .catch(error => console.error(error));
     }
 
+    // Get the modal and the button
+    const modal = document.getElementById("commentModal");
+    const leaveCommentBtn = document.getElementById("leaveCommentBtn");
+
+    // Open the modal when the button is clicked
+    leaveCommentBtn.addEventListener("click", function() {
+        modal.style.display = "block";
+    });
+
+    // Close the modal when the user clicks outside of it
+    window.addEventListener("click", function(event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    });
 </script>
 
 
