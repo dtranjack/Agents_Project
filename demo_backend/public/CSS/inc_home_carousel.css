@@ -1,47 +1,46 @@
 /* Increase specificity for carousel item images */
 div.caro-slide .carousel-item img {
     object-fit: cover;
-    height: 70vh;
+    height: 600px;
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
-    text-align: center;
 }
 
 /* Increase specificity for carousel captions */
 div.caro-slide .carousel-caption {
-    text-align: left;
-    position: absolute;
-    left: 0;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    padding: 18vh 15px 15px 5vw;
-    font-size: 2vw;
+    text-align: center;
+    padding: 20px;
     font-weight: bold;
     color: white;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    background: linear-gradient(to right, rgba(0, 0, 0, 0.3), transparent);
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Vertically center the content */
 }
 
 /* Increase specificity for header captions */
 div.caro-slide .header-caption {
-    font-size: 4.5vw;
+    font-size: 40px;
     font-weight: bold;
+    margin: 0 auto; /* Horizontally center the caption */
 }
 
 /* Increase specificity for responsive breakpoints */
 @media (max-width: 992px) {
     div.caro-slide .carousel-item img {
-        height: 50vh;
+        height: 400px;
+    }
+
+    div.caro-slide .header-caption {
+        font-size: 30px;
     }
 }
 
 @media (max-width: 768px) {
     div.caro-slide .carousel-item img {
-        height: 40vh;
+        height: 300px;
     }
 
     div.caro-slide .carousel-caption {
@@ -49,7 +48,7 @@ div.caro-slide .header-caption {
     }
 
     div.caro-slide .header-caption {
-        font-size: 6vw;
+        font-size: 25px;
     }
 }
 
@@ -64,3 +63,4 @@ div.caro-slide .carousel-control-prev{
 div.caro-slide .carousel-control-next {
     display: none !important;
 }
+

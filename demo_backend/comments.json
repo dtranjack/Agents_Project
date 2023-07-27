@@ -41,5 +41,10 @@
     "name": "test2",
     "comment": "test3",
     "monumentName": "Halong Bay"
+  },
+  {
+    "name": "Duong",
+    "comment": "Test 3",
+    "monumentName": "Great Wall of China"
   }
 ]
