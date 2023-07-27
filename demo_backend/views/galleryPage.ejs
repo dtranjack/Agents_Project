@@ -1,0 +1,9 @@
+<div class="row gallery-container" id="image-gallery">
+    <% galleryImages.forEach((imagePath, index) => { %>
+        <div class="col-md-4 col-sm-6 mb-4 gallery-item <%= (index >= (pageNumber - 1) * 9 && index < pageNumber * 9) ? '' : 'd-none' %>">
+            <a href="<%= imagePath %>" data-lightbox="gallery" data-title="Image <%= index + 1 %>">
+                <img src="<%= imagePath %>" class="img-fluid rounded" alt="Image <%= index + 1 %>">
+            </a>
+        </div>
+    <% }); %>
+</div>

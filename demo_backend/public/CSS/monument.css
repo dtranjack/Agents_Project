@@ -1,0 +1,286 @@
+html {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 1200px;
+}
+
+.header-container {
+    display: flex;
+    flex-direction: column;
+    height: 600px;
+}
+
+.img-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.img-container img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.solid {
+    border-top: 8px solid #000000;
+    border-radius: 5px;
+}
+
+.text-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    z-index: 1;
+}
+
+.text-overlay h1 {
+    font-size: 40px;
+    margin-bottom: 20px;
+    text-shadow: 5px 5px 8px rgba(0, 0, 0, 0.5);
+    font-weight: bold;
+}
+
+.text-overlay p {
+    font-size: 18px;
+    margin-bottom: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Add a semi-transparent background to the text overlay to make it more highlighted */
+.text-overlay {
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 20px;
+}
+
+.animated-overlay {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Add a slight animation to the text overlay for a subtle pop-up effect */
+.text-overlay {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.text-overlay.visible {
+    opacity: 1;
+}
+
+
+/* Description section styles */
+.description {
+    margin-top: 50px;
+}
+
+.description h2 {
+    margin-bottom: 20px;
+    color: #007bff;
+}
+
+.desc {
+    padding: 16px;
+    border-style: hidden hidden hidden double;
+    border-color: crimson;
+    border-width: 5px;
+    border-radius: 12px;
+    background-color: #c7e2ff;
+    font-size: 20px;
+    white-space: pre-line;
+}
+
+.feedbacks {
+    padding: 16px;
+    border-style: hidden hidden hidden double;
+    border-color: crimson;
+    border-width: 5px;
+    border-radius: 12px;
+    background-color: #c7e2ff;
+    font-size: 20px;
+}
+
+.contact-us-inner {
+    padding: 16px;
+    border-style: hidden hidden hidden double;
+    border-color: crimson;
+    border-width: 5px;
+    border-radius: 12px;
+    background-color: #c7e2ff;
+    font-size: 20px;
+    margin-bottom: 50px;
+}
+
+.comments {
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+
+.comments button {
+    margin-top: 20px;
+}
+
+.comment-box h2 {
+    margin-bottom: 20px;
+    color: #007bff;
+}
+
+.comment h2 {
+    margin-bottom: 20px;
+    color: #007bff;
+}
+
+.comment-box form {
+    display: flex;
+    flex-direction: column;
+}
+
+.comment-box .form-group {
+    margin-bottom: 20px;
+}
+
+.comment-box label {
+    margin-bottom: 5px;
+}
+
+.comment-box input,
+.comment-box textarea {
+    padding: 10px;
+}
+
+.comment-box button {
+    padding: 10px 20px;
+}
+
+
+/* Add your custom CSS for the gallery here */
+
+.gallery {
+    margin-top: 50px;
+}
+
+/* Add your custom CSS for the gallery here */
+.gallery-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-between; /* This will create space between images */
+    max-width: 960px; /* Limit the width of the gallery */
+    margin: 0 auto; /* Center the gallery on the page */
+}
+
+.gallery-item {
+    flex-basis: calc(33.33% - 10px); /* Distribute equally with gaps (3 images per row) */
+    max-width: calc(33.33% - 10px);
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.3s ease-in-out;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 200px; /* Set a fixed height for the images */
+    object-fit: cover; /* Maintain aspect ratio and cover the container */
+    cursor: pointer;
+}
+
+/* Add hover animation */
+.gallery-item:hover {
+    transform: scale(1.05);
+}
+
+.gallery h2 {
+    margin-bottom: 20px;
+    color: #007bff;
+}
+
+.contact-us h2 {
+    margin-bottom: 20px;
+    color: #007bff;
+}
+
+.vid h2 {
+    margin-bottom: 20px;
+    color: #007bff;
+}
+
+.vid {
+    margin-top: 50px;
+}
+
+/* Make vid section responsive */
+/* Responsive video wrapper */
+.video-wrapper {
+    position: relative;
+    padding-top: 56.25%; /* 16:9 aspect ratio (480 / 853 * 100) */
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+@media screen and (max-width: 768px) {
+    .vydia {
+        padding-left: 0;
+    }
+}
+
+.navbarstick {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.direction {
+    margin-top: 50px;
+    white-space: pre-line;
+}
+
+.direction h2 {
+    margin-bottom: 20px;
+    color: #007bff;
+}
+
+.direction h4 {
+    font-weight: bold;
+    color: #000080;
+}
+
+.normal {
+    display: block;
+    margin: 0.5em auto;
+    border-style: inset;
+    border-width: 2px;
+    border-top: 3px solid black;
+
+}
+
+.howtoGet {
+    padding: 16px;
+    border-style: hidden hidden hidden double;
+    border-color: crimson;
+    border-width: 5px;
+    border-radius: 12px;
+    background-color: #c7e2ff;
+    font-size: 20px;
+    margin-bottom: 50px;
+}
+
+.mappu h2 {
+    margin-bottom: 20px;
+    color: #007bff;
+}

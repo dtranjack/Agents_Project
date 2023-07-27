@@ -31,3 +31,11 @@
     list-style: none;
     padding-left: 0; /* Optional: Remove default left padding */
 }
+
+.navbarstick {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}

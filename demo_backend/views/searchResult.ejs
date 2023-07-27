@@ -65,7 +65,7 @@
         text-align: center;
         padding: 50px 0;
         background-color: #f1f1f1; /* Fallback background color */
-        height: 70vh;
+        height: 600px;
         clear: both;
     }
 
@@ -153,6 +153,16 @@
                 </div>
             <% } %>
         </div>
+        <!-- Pagination Links -->
+        <nav aria-label="Pagination">
+            <ul class="pagination">
+                <% for (let i = 1; i <= pageCount; i++) { %>
+                    <li class="page-item <% if (i === currentPage) { %>active<% } %>">
+                        <a class="page-link" href="/searchResult?term=<%= searchingTerm %>&page=<%= i %>"><%= i %></a>
+                    </li>
+                <% } %>
+            </ul>
+        </nav>
     </div>
 </div>
 <div class="footer">

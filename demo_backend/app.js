@@ -17,6 +17,7 @@ var allResult;
 var monuqueResult;
 var searchingTerm;
 
+
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -31,6 +32,10 @@ connection.connect((err) => {
     }
     console.log('Connected to the database!');
 });
+
+// Middleware to parse incoming form data
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 const gimmeContiInfos = 'SELECT * FROM continents';
 connection.query(gimmeContiInfos, (error, results) => {
@@ -102,12 +107,8 @@ function saveComments(comments) {
     fs.writeFileSync(commentsPath, JSON.stringify(comments, null, 2), 'utf8');
 }
 
-// Middleware to parse incoming form data
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
-
 // Route to handle the contact form submission and save data
-app.post('/submit', (req, res) => {
+app.post('/submitContact', (req, res) => {
     const formData = {
         fullName: req.body['full-name'],
         email: req.body.email,
@@ -166,6 +167,38 @@ app.get('/monuments/:monumentName', async (req, res) => {
     } catch (error) {
         console.error('Error fetching monument details:', error);
         res.status(500).json({error: 'An error occurred while fetching monument details'});
+    }
+});
+
+// Define a route to handle gallery pagination
+app.get('/gallery/:monumentName/page/:pageNumber', async (req, res) => {
+    const monumentName = req.params.monumentName;
+    const pageNumber = parseInt(req.params.pageNumber);
+
+    try {
+        // Fetch the gallery images for the monument
+        const galleryImages = await fetchGalleryImagesByMonumentName(monumentName);
+
+        // Calculate the start and end index for the images on the selected page
+        const startIndex = (pageNumber - 1) * 9;
+        const endIndex = pageNumber * 9;
+        const imagesToShow = galleryImages.slice(startIndex, endIndex);
+
+        // Render the image gallery with the images on the selected page and pass the pageNumber
+        res.render('galleryPage', {
+            monumentName,
+            images: imagesToShow,
+            galleryImages,
+            monuResult,
+            contiqueResult,
+            allmonuResult,
+            allResult,
+            monuqueResult,
+            pageNumber // Add pageNumber to the template
+        });
+    } catch (error) {
+        console.error('Error fetching monument details:', error);
+        res.status(500).json({ error: 'An error occurred while fetching monument details' });
     }
 });
 
@@ -263,23 +296,53 @@ app.get("/gallery/:monumentName", (req, res) => {
 // Route to handle search form submission
 app.get('/searchResult', (req, res) => {
     const searchTerm = req.query.term; // Get the search term from the query parameters
+    const page = parseInt(req.query.page) || 1; // Get the page number from the query parameters (default to 1)
+    const itemsPerPage = 9; // Number of items to display per page
+    const offset = (page - 1) * itemsPerPage; // Calculate the offset to determine the starting row for pagination
+
     const query = `SELECT m.*, c.name AS continentName
                    FROM monuments AS m
                    LEFT JOIN countries AS co ON m.country_id = co.id
                    LEFT JOIN continents AS c ON co.continent_id = c.id
-                   WHERE m.name LIKE ? OR c.name LIKE ? OR co.name LIKE ?`; // Perform a partial match search for monument name, continent name, and country name
+                   WHERE m.name LIKE ? OR c.name LIKE ? OR co.name LIKE ?
+                   LIMIT ? OFFSET ?`; // Add LIMIT and OFFSET for pagination
 
     const searchValue = `%${searchTerm}%`; // Add '%' at the beginning and end to match any substring
 
-    connection.query(query, [searchValue, searchValue, searchValue], (error, results) => {
+    connection.query(query, [searchValue, searchValue, searchValue, itemsPerPage, offset], (error, results) => {
         if (error) {
             console.error('Error executing query:', error);
             res.status(500).json({ error: 'Internal server error' });
         } else {
-            const count = results.length;
-            searchingTerm = searchTerm;
-            // Render the searchResult.ejs template with the search results
-            res.render('searchResult', { count, monuments: results, searchingTerm, monuResult, contiqueResult, allmonuResult, allResult, monuqueResult });
+            // Perform a count query to get the total number of search results
+            const countQuery = `SELECT COUNT(*) as total FROM monuments AS m
+                                LEFT JOIN countries AS co ON m.country_id = co.id
+                                LEFT JOIN continents AS c ON co.continent_id = c.id
+                                WHERE m.name LIKE ? OR c.name LIKE ? OR co.name LIKE ?`;
+
+            connection.query(countQuery, [searchValue, searchValue, searchValue], (error, countResults) => {
+                if (error) {
+                    console.error('Error executing count query:', error);
+                    res.status(500).json({ error: 'Internal server error' });
+                } else {
+                    const totalItems = countResults[0].total;
+                    const pageCount = Math.ceil(totalItems / itemsPerPage); // Calculate the total number of pages
+
+                    // Render the searchResult.ejs template with the search results and pagination values
+                    res.render('searchResult', {
+                        count: totalItems,
+                        monuments: results,
+                        searchingTerm: searchTerm,
+                        pageCount: pageCount,
+                        currentPage: page,
+                        monuResult,
+                        contiqueResult,
+                        allmonuResult,
+                        allResult,
+                        monuqueResult
+                    });
+                }
+            });
         }
     });
 });
@@ -428,7 +491,6 @@ app.get('/search', (req, res) => {
     });
 });
 
-
 // Serve static files
 app.use(express.static(__dirname + '/public'));
 
@@ -469,8 +531,49 @@ app.get(route_home, (req, res) => {
     res.render('Homepage', {contiqueResult, monuResult, allmonuResult, allResult});
 });
 
+// Route handler for /all with pagination
 app.get('/all', (req, res) => {
-    res.render('All_Destination', {monuResult, contiqueResult, allmonuResult, allResult});
+    const itemsPerPage = 9;
+    const currentPage = parseInt(req.query.page) || 1; // Get the current page from the query parameter, default to page 1 if not provided
+
+    // Calculate the offset to fetch the monuments for the current page
+    const offset = (currentPage - 1) * itemsPerPage;
+
+    // SQL query to fetch the monuments for the current page with pagination
+    const query = `SELECT *
+                   FROM monuments
+                   ORDER BY ID
+                   LIMIT ? OFFSET ?`;
+
+    // Execute the SQL query with pagination parameters
+    connection.query(query, [itemsPerPage, offset], (error, results) => {
+        if (error) {
+            console.error('Error executing query:', error);
+            res.status(500).json({ error: 'Internal server error' });
+        } else {
+            // Fetch the total number of monuments to calculate the total number of pages
+            const totalMonumentsQuery = 'SELECT COUNT(*) AS totalCount FROM monuments';
+            connection.query(totalMonumentsQuery, (error, totalCountResult) => {
+                if (error) {
+                    console.error('Error executing totalMonumentsQuery:', error);
+                    res.status(500).json({ error: 'Internal server error' });
+                } else {
+                    const totalMonuments = totalCountResult[0].totalCount;
+                    const pageCount = Math.ceil(totalMonuments / itemsPerPage);
+
+                    // Render the All_Destination.ejs template with the monuments and pagination data
+                    res.render('All_Destination', {
+                        monuResult,
+                        contiqueResult,
+                        allmonuResult,
+                        allResult: results, // Pass the fetched monuments for the current page
+                        currentPage,
+                        pageCount,
+                    });
+                }
+            });
+        }
+    });
 });
 
 // Start the server
