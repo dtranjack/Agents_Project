@@ -18,22 +18,33 @@
 
         body {
             font-family: 'GT Eesti Display Trial', sans-serif;
+            margin: 0;
+            padding: 0;
         }
 
         .card-img-top {
             object-fit: cover;
-            height: 250px;
+            height: 100%;
             transition: transform 0.3s ease;
+            display: block;
+            background-size: cover;
+            background-position: center;
         }
 
         .card:hover .card-img-top {
             transform: scale(1.1);
+            height: 100%;
+        }
+
+        .card-img-container {
+            width: 100%;
+            height: 40vh;
             overflow: hidden;
-            height: 250px;
+
         }
 
         .card-body {
-            height: 100%;
+            height: 50%;
             display: flex;
             flex-direction: column;
         }
@@ -58,40 +69,45 @@
         .header-container {
             display: flex;
             flex-direction: column;
-            height: 600px;
+            height: 100vh;
         }
 
         .img-container {
+            height: 100%;
             flex: 1;
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
             position: relative;
-        }
-
-        .img-container img {
-            object-fit: cover;
-            width: 100%;
-            height: 100%;
-            border: none;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
         }
 
         .text-overlay {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            /* Remove transform and top/left properties */
             text-align: center;
             color: white;
             z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Center vertically */
+            align-items: center; /* Center horizontally */
+            height: 100%;
+            padding: 20px;
         }
+
 
         .text-overlay h1 {
             font-size: 40px;
             margin-bottom: 20px;
             text-shadow: 5px 5px 8px rgba(0, 0, 0, 0.5);
             font-weight: bold;
+            background-color: rgba(0, 0, 0, 0.25);
+            padding: 30px;
+            border-radius: 12px;
         }
 
         .text-overlay p {
@@ -100,13 +116,8 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
-        .text-overlay {
-            padding: 20px;
-        }
-
         .hed {
             margin-bottom: 20px;
-            color: #007bff;
         }
     </style>
 </head>
@@ -117,8 +128,7 @@
 </div>
 
 <div class="header-container">
-    <div class="img-container">
-        <img src="<%= continentResult[0].continentCover %>" alt="<%= continentResult[0].continentName %>">
+    <div class="img-container" style="background-image: url(<%= continentResult[0].continentCover %>)">
         <div class="text-overlay animated-overlay">
             <h1>Explore the wonders of <%= continentResult[0].continentName %></h1>
         </div>
@@ -126,7 +136,7 @@
 </div>
 <div class="container mt-4" style="margin-bottom: 50px">
     <div class="container mt-4">
-        <h2 class="hed">Monuments of <strong><%= continentResult[0].continentName %></strong></h2>
+        <h2 class="hed">Monuments of <strong><%= continentResult[0].continentName %></strong>:</h2>
         <% if (continentResult.length === 0) { %>
             <p>No monument found for this continent at the moment</p>
         <% } else { %>
@@ -134,10 +144,11 @@
                 <% continentResult.forEach((monument) => { %>
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card">
-                            <a href="/monuments/<%= monument.name %>" target="_blank">
-                                <img src="<%= monument.mini_background %>" class="card-img-top"
-                                     alt="Destination Image">
-                            </a>
+                            <div class="card-img-container">
+                                <a class="card-img-top" style="background-image: url(<%= monument.mini_background %>)"
+                                   href="/monuments/<%= monument.name %>" target="_blank">
+                                </a>
+                            </div>
                             <div class="card-body">
                                 <a href="/monuments/<%= monument.name %>" target="_blank">
                                     <h5 class="card-title"><%= monument.name %></h5>
@@ -160,6 +171,20 @@
     // Serialize the continentResult to JSON and pass it to the client-side script
     var continentResult = <%- JSON.stringify(continentResult) %>;
     console.log(continentResult);
+
+    // JavaScript code for parallax scrolling effect
+    const headerContainer = document.querySelector('.header-container');
+    const imgContainer = headerContainer.querySelector('.img-container');
+    const textOverlay = headerContainer.querySelector('.text-overlay');
+
+    window.addEventListener('scroll', () => {
+        // Calculate the scroll position
+        const scrollY = window.scrollY;
+
+        // Adjust the position of the text overlay based on scrollY to create the parallax effect
+        textOverlay.style.transform = `translateY(${scrollY * 0.5}px)`;
+    });
+
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.0-beta3/js/bootstrap.bundle.min.js"></script>

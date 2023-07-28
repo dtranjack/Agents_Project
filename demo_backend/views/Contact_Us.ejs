@@ -14,12 +14,16 @@
 <div class="head-bar">
     <%- include('./layout/NavBar') %>
 </div>
-<div class="header2">
-    <h1>
-        Contact Us
-        <br>
-        <span style="font-size: 25px">Let us help you explore what you love</span>
-    </h1>
+<div class="header-container">
+    <div class="img-container">
+        <div class="text-overlay">
+            <h1>
+                Contact Us
+                <br>
+                <span style="font-size: 25px">Let us help you explore what you love</span>
+            </h1>
+        </div>
+    </div>
 </div>
 
 <div class="container">
@@ -96,6 +100,20 @@
 <div style="margin-top: 50px" class="footer">
     <%- include('./layout/footer') %>
 </div>
+<script>
+    // JavaScript code for parallax scrolling effect
+    const headerContainer = document.querySelector('.header-container');
+    const imgContainer = headerContainer.querySelector('.img-container');
+    const textOverlay = headerContainer.querySelector('.text-overlay');
+
+    window.addEventListener('scroll', () => {
+        // Calculate the scroll position
+        const scrollY = window.scrollY;
+
+        // Adjust the position of the text overlay based on scrollY to create the parallax effect
+        textOverlay.style.transform = `translateY(${scrollY * 0.5}px)`;
+    });
+</script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

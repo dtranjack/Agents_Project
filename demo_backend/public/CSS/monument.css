@@ -6,47 +6,55 @@ html {
     max-width: 1200px;
 }
 
-.header-container {
-    display: flex;
-    flex-direction: column;
-    height: 600px;
-}
-
-.img-container {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    position: relative;
-}
-
-.img-container img {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-}
 
 .solid {
     border-top: 8px solid #000000;
     border-radius: 5px;
 }
 
+.header-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.img-container {
+    height: 100%;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    background-image: url('IMG/Travel.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
 .text-overlay {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    /* Remove transform and top/left properties */
     text-align: center;
     color: white;
     z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
+    height: 100%;
+    padding: 20px;
 }
+
 
 .text-overlay h1 {
     font-size: 40px;
     margin-bottom: 20px;
     text-shadow: 5px 5px 8px rgba(0, 0, 0, 0.5);
     font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.25);
+    padding: 30px;
+    border-radius: 12px;
 }
 
 .text-overlay p {
@@ -54,29 +62,6 @@ html {
     margin-bottom: 0;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
-
-/* Add a semi-transparent background to the text overlay to make it more highlighted */
-.text-overlay {
-    background-color: rgba(0, 0, 0, 0.4);
-    padding: 20px;
-}
-
-.animated-overlay {
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-}
-
-/* Add a slight animation to the text overlay for a subtle pop-up effect */
-.text-overlay {
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-}
-
-.text-overlay.visible {
-    opacity: 1;
-}
-
-
 /* Description section styles */
 .description {
     margin-top: 50px;
