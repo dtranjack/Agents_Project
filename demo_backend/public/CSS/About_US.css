@@ -24,7 +24,7 @@ body {
     text-align: center;
     padding: 50px 0;
     background-color: #f1f1f1; /* Fallback background color */
-    height: 600px;
+    height: 100vh;
     clear: both;
 }
 

@@ -87,22 +87,26 @@
         }
 
         .text-overlay {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            /* Remove transform and top/left properties */
             text-align: center;
             color: white;
             z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Center vertically */
+            align-items: center; /* Center horizontally */
+            height: 100%;
         }
+
 
         .text-overlay h1 {
             font-size: 40px;
             margin-bottom: 20px;
             text-shadow: 5px 5px 8px rgba(0, 0, 0, 0.5);
             font-weight: bold;
-            background-color: rgba(0, 0, 0, 0.4);
+            background-color: rgba(0, 0, 0, 0.25);
             padding: 30px;
+            border-radius: 12px;
         }
 
         .text-overlay p {
@@ -144,7 +148,8 @@
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card">
                             <div class="card-img-container">
-                                <a class="card-img-top" style="background-image: url(<%= monument.mini_background %>)" href="/monuments/<%= monument.name %>" target="_blank">
+                                <a class="card-img-top" style="background-image: url(<%= monument.mini_background %>)"
+                                   href="/monuments/<%= monument.name %>" target="_blank">
                                 </a>
                             </div>
                             <div class="card-body">
@@ -169,6 +174,20 @@
     // Serialize the continentResult to JSON and pass it to the client-side script
     var continentResult = <%- JSON.stringify(continentResult) %>;
     console.log(continentResult);
+
+    // JavaScript code for parallax scrolling effect
+    const headerContainer = document.querySelector('.header-container');
+    const imgContainer = headerContainer.querySelector('.img-container');
+    const textOverlay = headerContainer.querySelector('.text-overlay');
+
+    window.addEventListener('scroll', () => {
+        // Calculate the scroll position
+        const scrollY = window.scrollY;
+
+        // Adjust the position of the text overlay based on scrollY to create the parallax effect
+        textOverlay.style.transform = `translateY(${scrollY * 0.5}px)`;
+    });
+
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.0-beta3/js/bootstrap.bundle.min.js"></script>
