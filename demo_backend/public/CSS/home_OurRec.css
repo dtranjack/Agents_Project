@@ -12,23 +12,29 @@ div.OurRec body {
 
 div.OurRec .card-img-top {
     object-fit: cover;
-    height: 250px;
+    height: 100%;
     transition: transform 0.3s ease;
-    border: none;
+    display: block;
+    background-size: cover;
+    background-position: center;
 }
 
 div.OurRec .card:hover .card-img-top {
     transform: scale(1.1);
+    height: 100%;
+}
+
+div.OurRec .card-img-container {
+    width: 100%;
+    height: 40vh;
     overflow: hidden;
-    height: 250px;
-    border: none;
+
 }
 
 div.OurRec .card-body {
-    height: 100%;
+    height: 50%;
     display: flex;
     flex-direction: column;
-    text-overflow: ellipsis;
 }
 
 div.OurRec .card-title {

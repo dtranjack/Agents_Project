@@ -22,18 +22,27 @@
 
         .card-img-top {
             object-fit: cover;
-            height: 250px;
+            height: 100%;
             transition: transform 0.3s ease;
+            display: block;
+            background-size: cover;
+            background-position: center;
         }
 
         .card:hover .card-img-top {
             transform: scale(1.1);
+            height: 100%;
+        }
+
+        .card-img-container {
+            width: 100%;
+            height: 40vh;
             overflow: hidden;
-            height: 250px;
+
         }
 
         .card-body {
-            height: 100%;
+            height: 50%;
             display: flex;
             flex-direction: column;
         }
@@ -58,7 +67,7 @@
         .header-container {
             display: flex;
             flex-direction: column;
-            height: 600px;
+            height: 100vh;
         }
 
         .img-container {
@@ -106,7 +115,6 @@
 
         .hed {
             margin-bottom: 20px;
-            color: #007bff;
         }
     </style>
 </head>
@@ -126,7 +134,7 @@
 </div>
 <div class="container mt-4" style="margin-bottom: 50px">
     <div class="container mt-4">
-        <h2 class="hed">Monuments of <strong><%= continentResult[0].continentName %></strong></h2>
+        <h2 class="hed">Monuments of <strong><%= continentResult[0].continentName %></strong>:</h2>
         <% if (continentResult.length === 0) { %>
             <p>No monument found for this continent at the moment</p>
         <% } else { %>
@@ -134,10 +142,10 @@
                 <% continentResult.forEach((monument) => { %>
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card">
-                            <a href="/monuments/<%= monument.name %>" target="_blank">
-                                <img src="<%= monument.mini_background %>" class="card-img-top"
-                                     alt="Destination Image">
-                            </a>
+                            <div class="card-img-container">
+                                <a class="card-img-top" style="background-image: url(<%= monument.mini_background %>)" href="/monuments/<%= monument.name %>" target="_blank">
+                                </a>
+                            </div>
                             <div class="card-body">
                                 <a href="/monuments/<%= monument.name %>" target="_blank">
                                     <h5 class="card-title"><%= monument.name %></h5>

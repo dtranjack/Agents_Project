@@ -21,20 +21,28 @@
         }
 
         .card-img-top {
-            border: none;
             object-fit: cover;
-            height: 250px;
+            height: 100%;
             transition: transform 0.3s ease;
+            display: block;
+            background-size: cover;
+            background-position: center;
         }
 
         .card:hover .card-img-top {
             transform: scale(1.1);
+            height: 100%;
+        }
+
+        .card-img-container {
+            width: 100%;
+            height: 40vh;
             overflow: hidden;
-            height: 250px;
+
         }
 
         .card-body {
-            height: 100%;
+            height: 50%;
             display: flex;
             flex-direction: column;
         }
@@ -106,9 +114,10 @@
             <% allResult.forEach((monument) => { %>
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card">
-                        <a href="/monuments/<%= monument.name %>" target="_blank">
-                            <img src="<%= monument.mini_background %>" class="card-img-top" alt="Destination Image">
-                        </a>
+                        <div class="card-img-container">
+                            <a class="card-img-top" style="background-image: url(<%= monument.mini_background %>)" href="/monuments/<%= monument.name %>" target="_blank">
+                            </a>
+                        </div>
                         <div class="card-body">
                             <a href="/monuments/<%= monument.name %>" target="_blank">
                                 <h5 class="card-title"><%= monument.name %></h5>
