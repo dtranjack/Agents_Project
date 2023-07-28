@@ -9,6 +9,7 @@ div.caro-slide .carousel-item img {
 
 /* Increase specificity for carousel captions */
 div.caro-slide .carousel-caption {
+
     text-align: center;
     padding: 20px;
     font-weight: bold;
@@ -18,6 +19,11 @@ div.caro-slide .carousel-caption {
     display: flex;
     flex-direction: column;
     justify-content: center; /* Vertically center the content */
+}
+
+div.caro-slide .carousel-caption h3 {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 20px;
 }
 
 /* Increase specificity for header captions */

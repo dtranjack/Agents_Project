@@ -65,11 +65,13 @@
         </div>
     </div>
 </nav>
+
 <div class="header-container">
-    <div class="img-container">
-        <img src="<%= monumentDetails.cover %>" alt="<%= monumentDetails.name %>">
+    <div class="img-container" style="background-image: url(<%= monumentDetails.cover %>)">
         <div class="text-overlay animated-overlay">
-            <h1>Welcome to <%= monumentDetails.name %></h1>
+            <h1>
+                Welcome to <%= monumentDetails.name %>
+            </h1>
         </div>
     </div>
 </div>
@@ -334,8 +336,20 @@
             modal.style.display = "none";
         }
     });
-</script>
 
+    // JavaScript code for parallax scrolling effect
+    const headerContainer = document.querySelector('.header-container');
+    const imgContainer = headerContainer.querySelector('.img-container');
+    const textOverlay = headerContainer.querySelector('.text-overlay');
+
+    window.addEventListener('scroll', () => {
+        // Calculate the scroll position
+        const scrollY = window.scrollY;
+
+        // Adjust the position of the text overlay based on scrollY to create the parallax effect
+        textOverlay.style.transform = `translateY(${scrollY * 0.5}px)`;
+    });
+</script>
 
 </body>
 </html>
