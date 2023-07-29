@@ -31,6 +31,7 @@ div.caro-slide .header-caption {
     font-size: 40px;
     font-weight: bold;
     margin: 0 auto; /* Horizontally center the caption */
+    border-radius: 12px;
 }
 
 /* Increase specificity for responsive breakpoints */
@@ -69,4 +70,3 @@ div.caro-slide .carousel-control-prev{
 div.caro-slide .carousel-control-next {
     display: none !important;
 }
-
