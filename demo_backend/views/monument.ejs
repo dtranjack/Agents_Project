@@ -141,6 +141,7 @@
             <h4><i class="fas fa-clock-o" aria-hidden="true"></i> Travel Time:</h4><p><%= monumentDetails.travelTime %></p><hr class="normal">
             <h4><i class="fas fa-exclamation-circle" aria-hidden="true"></i> Tips and Warnings</h4><p><%= monumentDetails.Tips %></p><hr class="normal">
             <h4><i class="fas fa-phone-square" aria-hidden="true"></i> Contact Information:</h4><p><%- monumentDetails.contactInfo %></p><hr class="normal">
+            <h4><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Please note that the provided information above is for reference purposes and can always be subject to changes. It's always a good idea to check for updated transportation schedules and any special announcements before planning your visit.</h4>
         </div>
     </div>
 </section>
@@ -261,6 +262,38 @@
         </div>
     </div>
 </footer>
+
+<!-- Back to Top button -->
+<button id="backToTopBtn" class="btn btn-primary" title="Back to Top">
+    <i class="fas fa-chevron-up"></i>
+</button>
+
+<style>
+    #backToTopBtn {
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 99;
+    }
+</style>
+
+<script>
+    // Show/hide "Back to Top" button based on scroll position
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 100) {
+            $('#backToTopBtn').fadeIn();
+        } else {
+            $('#backToTopBtn').fadeOut();
+        }
+    });
+
+    // Smooth scroll to top when the button is clicked (faster animation)
+    $('#backToTopBtn').click(function () {
+        $('html, body').animate({ scrollTop: 0 }, 300); // Adjust the duration here (in milliseconds)
+        return false;
+    });
+</script>
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {

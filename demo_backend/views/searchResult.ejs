@@ -204,6 +204,38 @@
     <%- include('./layout/footer') %>
 </div>
 
+<!-- Back to Top button -->
+<button id="backToTopBtn" class="btn btn-primary" title="Back to Top">
+    <i class="fas fa-chevron-up"></i>
+</button>
+
+<style>
+    #backToTopBtn {
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 99;
+    }
+</style>
+
+<script>
+    // Show/hide "Back to Top" button based on scroll position
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 100) {
+            $('#backToTopBtn').fadeIn();
+        } else {
+            $('#backToTopBtn').fadeOut();
+        }
+    });
+
+    // Smooth scroll to top when the button is clicked (faster animation)
+    $('#backToTopBtn').click(function () {
+        $('html, body').animate({ scrollTop: 0 }, 300); // Adjust the duration here (in milliseconds)
+        return false;
+    });
+</script>
+
 <script>
     // JavaScript code for parallax scrolling effect
     const headerContainer = document.querySelector('.header-container');
