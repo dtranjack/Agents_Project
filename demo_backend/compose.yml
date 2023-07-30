@@ -1,11 +1,17 @@
 version: '3'
 
+networks:
+  #  proxy:
+  #    name: traefik_proxy
+  default:
 services:
   db:
     image: mariadb
     environment:
       - "MYSQL_ROOT_PASSWORD=171198"
       - "MYSQL_DATABASE=monument"
+    networks:
+      - default
     ports:
       - 3306:3306
     volumes:
@@ -13,4 +19,23 @@ services:
   admin:
     image: phpmyadmin
     ports:
-      - 8080:80
+      - 8089:80
+    networks:
+      - default
+  web:
+    build: .
+    ports:
+      - 8090:3000
+    networks:
+      #      - proxy
+      - default
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.monu_insecured.rule=Host("monu.${DOMAIN}")
+      - traefik.http.routers.monu_insecured.entrypoints=web
+      - traefik.http.routers.monu_insecured.middlewares=https_redirect@file
+      - traefik.http.routers.monu.rule=Host("monu.${DOMAIN}")
+      - traefik.http.routers.monu.tls=true
+      - traefik.http.routers.monu.tls.certresolver=main
+      - traefik.http.routers.monu.entrypoints=websecure
+      - traefik.http.services.monu.loadbalancer.server.port=3000
