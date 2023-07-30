@@ -8,7 +8,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" type="image/x-icon" href="/IMG/spirals.png">
+    <style>
+        #backToTopBtn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 99;
+        }
+    </style>
 </head>
+
 <body>
 <div class="head-bar">
     <%- include('./layout/NavBar') %>
@@ -49,10 +59,31 @@
     </div>
 </section>
 
+<!-- Back to Top button -->
+<button id="backToTopBtn" class="btn btn-primary" title="Back to Top">
+    <i class="fas fa-chevron-up"></i>
+</button>
+
 <div class="footer">
     <%- include('./layout/footer') %>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    // Show/hide "Back to Top" button based on scroll position
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 100) {
+            $('#backToTopBtn').fadeIn();
+        } else {
+            $('#backToTopBtn').fadeOut();
+        }
+    });
+
+    // Smooth scroll to top when the button is clicked (faster animation)
+    $('#backToTopBtn').click(function () {
+        $('html, body').animate({ scrollTop: 0 }, 300); // Adjust the duration here (in milliseconds)
+        return false;
+    });
+</script>
 </body>
 </html>
